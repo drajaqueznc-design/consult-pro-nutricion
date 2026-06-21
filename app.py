@@ -9,7 +9,7 @@ import os
 import json
 from datetime import date, datetime
 from db_utils import (
-    get_db, row_to_dict, rows_to_list,
+    get_db, row_to_dict, rows_to_list, init_db,
     calc_imc, calc_cintura_talla, calc_cintura_cadera,
     calc_homa_ir, calc_egfr_ckd_epi, calc_no_hdl,
     calc_indice_aterogenico, calc_get, calc_proteina_objetivo,
@@ -32,32 +32,7 @@ def today():
     return date.today().isoformat()
 
 
-# ── INICIALIZACIÓN AUTOMÁTICA DE BD ──────────────────────────
-# Render tiene filesystem efímero — la BD se recrea en cada deploy.
-# Los pacientes y datos clínicos se pierden al redesplegar.
-# Para producción real usar Render Persistent Disk o PostgreSQL.
-
-def init_db():
-    from db_utils import DB_PATH
-    import os
-    os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
-    schema_path = os.path.join(os.path.dirname(__file__), 'schema.sql')
-    if not os.path.exists(schema_path):
-        return
-    conn = sqlite3.connect(DB_PATH)
-    conn.execute("PRAGMA foreign_keys = ON")
-    conn.execute("PRAGMA journal_mode = WAL")
-    with open(schema_path, 'r', encoding='utf-8') as f:
-        # Ejecutar línea a línea para evitar errores con IF NOT EXISTS
-        sql = f.read()
-    try:
-        conn.executescript(sql)
-        conn.commit()
-    except Exception as e:
-        print(f'[init_db] Advertencia: {e}')
-    conn.close()
-
-init_db()
+init_db()   # crea tablas si no existen (SQLite local o PostgreSQL en Render)
 
 
 # ── ROOT ─────────────────────────────────────────────────────
