@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Paciente — Dra. Anayanet Jáquez</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+         background: linear-gradient(135deg, #1a2a4a 0%, #0d1b35 60%, #1a3a2a 100%);
+         min-height: 100vh; color: #111; }
+
+  /* ── LOGIN ── */
+  #login-screen {
+    min-height: 100vh; display: flex; align-items: center;
+    justify-content: center; padding: 20px;
+  }
+  .login-card {
+    background: #fff; border-radius: 20px; padding: 40px 36px;
+    width: min(400px, 100%); box-shadow: 0 20px 60px rgba(0,0,0,.4);
+    text-align: center;
+  }
+  .login-logo { width: 80px; height: auto; margin-bottom: 16px; }
+  .login-title { font-size: 20px; font-weight: 700; color: #1a2a4a; }
+  .login-sub   { font-size: 13px; color: #6b7280; margin-top: 4px; margin-bottom: 28px; }
+  .login-field { margin-bottom: 16px; text-align: left; }
+  .login-field label { font-size: 12px; font-weight: 600; color: #374151;
+                       text-transform: uppercase; letter-spacing: .05em; display: block; margin-bottom: 6px; }
+  .login-field input {
+    width: 100%; padding: 12px 16px; border: 2px solid #e5e7eb;
+    border-radius: 10px; font-size: 16px; color: #111; outline: none;
+    transition: border .15s; background: #f9fafb;
+    letter-spacing: 2px;
+  }
+  .login-field input:focus { border-color: #1a2a4a; background: #fff; }
+  .btn-login {
+    width: 100%; padding: 14px; background: #1a2a4a; color: #fff;
+    border: none; border-radius: 10px; font-size: 15px; font-weight: 700;
+    cursor: pointer; margin-top: 8px; transition: background .15s;
+  }
+  .btn-login:hover { background: #2d4a7a; }
+  .login-error { color: #dc2626; font-size: 13px; margin-top: 10px; display: none; }
+  .login-gold { color: #b8860b; font-size: 11px; margin-top: 20px; }
+
+  /* ── PORTAL ── */
+  #portal-screen { display: none; }
+  .portal-header {
+    background: #1a2a4a; color: #fff; padding: 16px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,.3);
+  }
+  .portal-header .logo-row { display: flex; align-items: center; gap: 12px; }
+  .portal-header img { height: 42px; }
+  .portal-header h1 { font-size: 15px; font-weight: 700; }
+  .portal-header p  { font-size: 11px; color: #93c5fd; margin-top: 1px; }
+  .btn-salir { background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3);
+               color: #fff; padding: 6px 14px; border-radius: 8px; font-size: 12px;
+               cursor: pointer; }
+
+  .portal-body { max-width: 680px; margin: 0 auto; padding: 20px 16px 60px; }
+
+  .bienvenida { background: #fff; border-radius: 16px; padding: 20px 24px;
+                margin-bottom: 16px; border-left: 5px solid #b8860b;
+                box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+  .bienvenida h2 { font-size: 18px; color: #1a2a4a; font-weight: 700; }
+  .bienvenida p  { font-size: 13px; color: #6b7280; margin-top: 4px; }
+
+  .card { background: #fff; border-radius: 16px; padding: 20px 24px;
+          margin-bottom: 14px; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+  .card-title { font-size: 12px; font-weight: 700; color: #6b7280;
+                text-transform: uppercase; letter-spacing: .06em;
+                margin-bottom: 16px; }
+
+  .meta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .meta-item { background: #f0f4ff; border-radius: 12px; padding: 14px 12px; text-align: center; }
+  .meta-item .val { font-size: 26px; font-weight: 800; color: #1a2a4a; font-variant-numeric: tabular-nums; }
+  .meta-item .lbl { font-size: 10px; color: #6b7280; margin-top: 3px; font-weight: 600; text-transform: uppercase; }
+
+  .farm-item { display: flex; align-items: flex-start; gap: 12px;
+               padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+  .farm-item:last-child { border-bottom: none; }
+  .farm-dot { width: 10px; height: 10px; border-radius: 50%; background: #1a2a4a;
+              flex-shrink: 0; margin-top: 4px; }
+  .farm-name { font-size: 14px; font-weight: 600; color: #1a2a4a; }
+  .farm-sub  { font-size: 12px; color: #6b7280; margin-top: 1px; }
+
+  .indicaciones { background: #f0fdf4; border-left: 4px solid #16a34a;
+                  border-radius: 0 10px 10px 0; padding: 14px 16px;
+                  font-size: 13px; color: #166534; line-height: 1.7;
+                  white-space: pre-line; }
+
+  .proxima { background: #fffbeb; border: 1px solid #fde68a;
+             border-radius: 12px; padding: 14px 18px;
+             display: flex; align-items: center; gap: 12px; }
+  .proxima .icon { font-size: 24px; }
+  .proxima .txt  { font-size: 13px; color: #92400e; }
+  .proxima strong { font-size: 16px; color: #1a2a4a; display: block; margin-top: 2px; }
+
+  /* Gráfica peso simple */
+  .peso-chart { display: flex; align-items: flex-end; gap: 8px; height: 80px;
+                padding-top: 10px; }
+  .peso-bar-wrap { flex: 1; display: flex; flex-direction: column;
+                   align-items: center; gap: 4px; }
+  .peso-bar { width: 100%; background: #dbeafe; border-radius: 4px 4px 0 0;
+              position: relative; transition: background .2s; }
+  .peso-bar.last { background: #1a2a4a; }
+  .peso-lbl { font-size: 10px; color: #6b7280; }
+  .peso-val  { font-size: 9px; color: #374151; font-weight: 600; }
+
+  .offline-banner {
+    background: #fef3c7; border: 1px solid #fcd34d; color: #92400e;
+    padding: 10px 16px; border-radius: 10px; font-size: 12px;
+    margin-bottom: 14px; display: none; text-align: center;
+  }
+  .online-banner {
+    background: #d1fae5; border: 1px solid #6ee7b7; color: #065f46;
+    padding: 10px 16px; border-radius: 10px; font-size: 12px;
+    margin-bottom: 14px; display: none; text-align: center;
+  }
+
+  .loading-spin {
+    display: flex; align-items: center; justify-content: center;
+    height: 200px; font-size: 13px; color: #6b7280;
+  }
+</style>
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div id="login-screen">
+  <div class="login-card">
+    <img class="login-logo" src="/static/img/logo.svg" alt="Logo">
+    <div class="login-title">Portal del Paciente</div>
+    <div class="login-sub">Dra. Anayanet Jáquez · Nutrióloga Clínica</div>
+
+    <div class="login-field">
+      <label>Número de cédula</label>
+      <input id="l-cedula" type="text" placeholder="000-0000000-0" inputmode="numeric"
+             oninput="this.value=this.value.replace(/[^0-9-]/g,'')">
+    </div>
+    <div class="login-field">
+      <label>PIN (4 dígitos)</label>
+      <input id="l-pin" type="password" placeholder="• • • •" maxlength="4"
+             inputmode="numeric" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+    </div>
+    <button class="btn-login" onclick="doLogin()">Entrar →</button>
+    <div id="login-error" class="login-error"></div>
+    <div class="login-gold">Tu PIN fue enviado por WhatsApp al registrarte.<br>Si no lo tienes, contacta a tu nutrióloga.</div>
+  </div>
+</div>
+
+<!-- ── PORTAL ── -->
+<div id="portal-screen">
+  <div class="portal-header">
+    <div class="logo-row">
+      <img src="/static/img/logo.svg" alt="Logo">
+      <div>
+        <h1 id="p-nombre-header">Mi portal</h1>
+        <p>Nutrición Clínica · Dra. Anayanet Jáquez</p>
+      </div>
+    </div>
+    <button class="btn-salir" onclick="salir()">Salir</button>
+  </div>
+
+  <div class="portal-body">
+    <div id="offline-banner" class="offline-banner">
+      📵 Sin conexión — Mostrando última información disponible
+    </div>
+    <div id="online-banner" class="online-banner">
+      ✓ Conectado — Información actualizada
+    </div>
+
+    <div id="portal-content">
+      <div class="loading-spin">Cargando tu información…</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = (window.CONSULT_PRO_BACKEND || window.location.origin) + '/api';
+let _pid = null;
+
+// ── Detección online/offline ──────────────────────────────
+window.addEventListener('online',  () => {
+  document.getElementById('offline-banner').style.display = 'none';
+  document.getElementById('online-banner').style.display  = 'block';
+  setTimeout(() => document.getElementById('online-banner').style.display='none', 3000);
+  // Flush cola de PINs pendientes
+  fetch(API + '/portal/flush_queue', { method:'POST' }).catch(()=>{});
+});
+window.addEventListener('offline', () => {
+  document.getElementById('offline-banner').style.display = 'block';
+  document.getElementById('online-banner').style.display  = 'none';
+});
+
+// ── Login ─────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && document.getElementById('login-screen').style.display !== 'none')
+    doLogin();
+});
+
+async function doLogin() {
+  const cedula = document.getElementById('l-cedula').value.trim();
+  const pin    = document.getElementById('l-pin').value.trim();
+  const errEl  = document.getElementById('login-error');
+  errEl.style.display = 'none';
+
+  if (!cedula || pin.length !== 4) {
+    errEl.textContent = 'Ingresa tu cédula y el PIN de 4 dígitos.';
+    errEl.style.display = 'block'; return;
+  }
+
+  try {
+    const r = await fetch(API + '/portal/login', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ cedula, pin })
+    });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.msg || 'Error');
+
+    _pid = data.data.paciente_id;
+    sessionStorage.setItem('portal_pid',    _pid);
+    sessionStorage.setItem('portal_nombre', data.data.nombre + ' ' + data.data.apellidos);
+
+    mostrarPortal(data.data);
+  } catch(e) {
+    errEl.textContent = e.message === 'Failed to fetch'
+      ? 'Sin conexión. Verifica tu internet.' : 'Cédula o PIN incorrecto.';
+    errEl.style.display = 'block';
+  }
+}
+
+function mostrarPortal(pac) {
+  document.getElementById('login-screen').style.display  = 'none';
+  document.getElementById('portal-screen').style.display = 'block';
+  document.getElementById('p-nombre-header').textContent = pac.nombre + ' ' + pac.apellidos;
+  cargarDatos();
+}
+
+async function cargarDatos() {
+  if (!_pid) return;
+  const el = document.getElementById('portal-content');
+  try {
+    const r = await fetch(API + '/portal/datos/' + _pid);
+    const d = await r.json();
+    if (!r.ok) throw new Error();
+    renderPortal(d.data);
+  } catch(e) {
+    el.innerHTML = `<div class="card" style="color:#6b7280;font-size:13px;text-align:center;padding:40px">
+      Sin datos disponibles. Consulta a tu nutrióloga.</div>`;
+  }
+}
+
+function renderPortal(d) {
+  if (d.sin_datos) {
+    document.getElementById('portal-content').innerHTML =
+      `<div class="card" style="text-align:center;padding:40px;color:#6b7280">
+        <div style="font-size:40px;margin-bottom:12px">🌱</div>
+        <div style="font-size:15px;font-weight:600;color:#1a2a4a">Aún no tienes datos registrados</div>
+        <div style="font-size:13px;margin-top:6px">Tu nutrióloga registrará tu información en la próxima consulta.</div>
+      </div>`;
+    return;
+  }
+
+  const nombre   = sessionStorage.getItem('portal_nombre') || '';
+  const kcal     = d.kcal_objetivo ? `<div class="meta-item"><div class="val">${Math.round(d.kcal_objetivo)}</div><div class="lbl">kcal / día</div></div>` : '';
+  const prot     = d.proteina_g    ? `<div class="meta-item"><div class="val">${Math.round(d.proteina_g)}g</div><div class="lbl">Proteína</div></div>` : '';
+  const agua     = d.agua_l        ? `<div class="meta-item"><div class="val">${parseFloat(d.agua_l).toFixed(1)}L</div><div class="lbl">Agua / día</div></div>` : '';
+
+  // Gráfica de peso
+  let pesoChart = '';
+  if (d.evolucion_peso && d.evolucion_peso.length > 0) {
+    const pesos = d.evolucion_peso;
+    const max   = Math.max(...pesos.map(p => p.peso));
+    const min   = Math.min(...pesos.map(p => p.peso)) * 0.95;
+    pesoChart = `
+    <div class="card">
+      <div class="card-title">📉 Evolución de peso</div>
+      <div class="peso-chart">
+        ${pesos.map((p, i) => {
+          const h = Math.max(10, Math.round(((p.peso - min) / (max - min + 0.01)) * 65));
+          const fecha = p.fecha ? p.fecha.slice(5) : '';
+          return `<div class="peso-bar-wrap">
+            <div class="peso-val">${p.peso}kg</div>
+            <div class="peso-bar${i===pesos.length-1?' last':''}" style="height:${h}px"></div>
+            <div class="peso-lbl">${fecha}</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }
+
+  // Fármacos
+  const farmHtml = (d.farmacos && d.farmacos.length)
+    ? d.farmacos.map(f => `
+        <div class="farm-item">
+          <div class="farm-dot"></div>
+          <div>
+            <div class="farm-name">${f.nombre || '—'}</div>
+            <div class="farm-sub">${f.dosis || ''} ${f.frecuencia || ''}</div>
+          </div>
+        </div>`).join('')
+    : '<div style="color:#6b7280;font-size:13px">Sin medicamentos registrados en esta visita.</div>';
+
+  // Próxima cita
+  const proximaHtml = d.proxima_cita ? `
+    <div class="proxima">
+      <div class="icon">📅</div>
+      <div class="txt">Próxima evaluación
+        <strong>${d.proxima_cita}</strong>
+      </div>
+    </div>` : '';
+
+  document.getElementById('portal-content').innerHTML = `
+    <div class="bienvenida">
+      <h2>Hola, ${nombre.split(' ')[0]} 👋</h2>
+      <p>Última consulta: ${d.visita_fecha || '—'}</p>
+    </div>
+
+    ${(kcal || prot || agua) ? `
+    <div class="card">
+      <div class="card-title">🎯 Tus metas nutricionales</div>
+      <div class="meta-grid">${kcal}${prot}${agua}</div>
+    </div>` : ''}
+
+    ${pesoChart}
+
+    ${d.indicaciones ? `
+    <div class="card">
+      <div class="card-title">📋 Indicaciones de tu nutrióloga</div>
+      <div class="indicaciones">${d.indicaciones}</div>
+    </div>` : ''}
+
+    ${d.farmacos?.length ? `
+    <div class="card">
+      <div class="card-title">💊 Medicamentos activos</div>
+      ${farmHtml}
+    </div>` : ''}
+
+    ${proximaHtml}
+
+    <div style="text-align:center;margin-top:24px;font-size:11px;color:rgba(255,255,255,.5)">
+      NutriCare · Dra. Anayanet Jáquez · Nutrióloga Clínica Especializada
+    </div>
+  `;
+}
+
+function salir() {
+  _pid = null;
+  sessionStorage.removeItem('portal_pid');
+  sessionStorage.removeItem('portal_nombre');
+  document.getElementById('login-screen').style.display  = 'flex';
+  document.getElementById('portal-screen').style.display = 'none';
+  document.getElementById('l-pin').value = '';
+}
+
+// Flush cola si cargamos con red
+if (navigator.onLine) {
+  fetch(API + '/portal/flush_queue', { method:'POST' }).catch(()=>{});
+}
+</script>
+</body>
+</html>

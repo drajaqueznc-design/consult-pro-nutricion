@@ -29,7 +29,12 @@ CREATE TABLE pacientes (
     activo              INTEGER DEFAULT 1,
     fecha_registro      DATETIME DEFAULT CURRENT_TIMESTAMP,
     fecha_actualizacion DATETIME DEFAULT CURRENT_TIMESTAMP,
-    notas_generales     TEXT
+    notas_generales     TEXT,
+    -- Portal paciente
+    pin_acceso          TEXT,
+    pin_generado_at     DATETIME,
+    pin_enviado         INTEGER DEFAULT 0,
+    portal_activo       INTEGER DEFAULT 1
 );
 
 -- ============================================================
@@ -593,7 +598,16 @@ CREATE TABLE IF NOT EXISTS farmacos_visita (
     justificacion_override TEXT,
     activo INTEGER DEFAULT 1,
     fecha_inicio DATE,
-    fecha_fin DATE
+    fecha_fin DATE,
+    ea_descripcion TEXT,
+    ea_gravedad TEXT,
+    ea_accion TEXT,
+    ea_fecha DATE,
+    cambio_motivo TEXT,
+    cambio_anterior TEXT,
+    cambio_nueva TEXT,
+    cambio_fecha DATE,
+    cambio_obs TEXT
 );
 
 -- ════════════════════════════════════════════════════════════

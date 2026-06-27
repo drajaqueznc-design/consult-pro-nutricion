@@ -3,7 +3,19 @@
    JavaScript principal
    ============================================================ */
 
-const API = 'http://localhost:5000/api';
+const API = `${window.CONSULT_PRO_BACKEND || window.location.origin}/api`;
+const LOGO_B64 = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjYwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI2MCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGRHIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgICBzdG9wLWNvbG9yPSIjZDRhZjM3Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iNDAlIiAgc3RvcC1jb2xvcj0iI2Y1ZTI3YSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjcwJSIgIHN0b3AtY29sb3I9IiNjODk1MWEiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjYjg4NjBiIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJkcm9wRyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiICBzdG9wLWNvbG9yPSIjMWEyYTRhIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzBkMWIzNSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CgogIDwhLS0gR09UQSDigJQgYm9yZGUgZG9yYWRvIC0tPgogIDxwYXRoIGQ9Ik0xMDAgOCBDMTAwIDgsIDE2OCA4MCwgMTY4IDEzOCBDMTY4IDE3OCwgMTM4IDIwOCwgMTAwIDIwOCBDNjIgMjA4LCAzMiAxNzgsIDMyIDEzOCBDMzIgODAsIDEwMCA4LCAxMDAgOCBaIgogICAgZmlsbD0idXJsKCNnb2xkRykiIC8+CgogIDwhLS0gR09UQSDigJQgaW50ZXJpb3IgYXp1bCBtYXJpbm8gLS0+CiAgPHBhdGggZD0iTTEwMCAxOCBDMTAwIDE4LCAxNTggODQsIDE1OCAxMzggQzE1OCAxNzIsIDEzMiAxOTgsIDEwMCAxOTggQzY4IDE5OCwgNDIgMTcyLCA0MiAxMzggQzQyIDg0LCAxMDAgMTgsIDEwMCAxOCBaIgogICAgZmlsbD0idXJsKCNkcm9wRykiIC8+CgogIDwhLS0gRklHVVJBIOKAlCBwZXJzb25hIGVzdGlsaXphZGEgKGRvcmFkYSkgLS0+CiAgPCEtLSBjYWJlemEgLS0+CiAgPGNpcmNsZSBjeD0iMTA4IiBjeT0iNjgiIHI9IjEwIiBmaWxsPSJ1cmwoI2dvbGRHKSIvPgogIDwhLS0gY3VlcnBvIGRpYWdvbmFsICsgYnJhem9zID0gZm9ybWEgZGUgWCBlc3RpbGl6YWRhIC0tPgogIDwhLS0gdHJvbmNvIC0tPgogIDxsaW5lIHgxPSIxMDgiIHkxPSI3OCIgeDI9IjkwIiB5Mj0iMTc1IiBzdHJva2U9InVybCgjZ29sZEcpIiBzdHJva2Utd2lkdGg9IjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDwhLS0gYnJhem8gaXpxdWllcmRvIChzdWJlIGEgbGEgZGVyZWNoYSkgLS0+CiAgPGxpbmUgeDE9Ijc1IiAgeTE9IjEwNSIgeDI9IjEzMCIgeTI9IjEzMCIgc3Ryb2tlPSJ1cmwoI2dvbGRHKSIgc3Ryb2tlLXdpZHRoPSI3IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8IS0tIHBpZXJuYSBkZXJlY2hhIC0tPgogIDxsaW5lIHgxPSI5MCIgIHkxPSIxNzUiIHgyPSIxMjAiIHkyPSIxOTUiIHN0cm9rZT0idXJsKCNnb2xkRykiIHN0cm9rZS13aWR0aD0iNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CgogIDwhLS0gVEVYVE86IERSQS4gQU5BWUFORVQgSsOBUVVFWiAtLT4KICA8dGV4dCB4PSIxMDAiIHk9IjIzMiIKICAgIGZvbnQtZmFtaWx5PSInR2VvcmdpYScsICdUaW1lcyBOZXcgUm9tYW4nLCBzZXJpZiIKICAgIGZvbnQtc2l6ZT0iMTMuNSIKICAgIGZvbnQtd2VpZ2h0PSI3MDAiCiAgICBsZXR0ZXItc3BhY2luZz0iMi41IgogICAgZmlsbD0iIzFhMmE0YSIKICAgIHRleHQtYW5jaG9yPSJtaWRkbGUiCiAgICBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5EUkEuIEFOQVlBTkVUIErDgVFVRVo8L3RleHQ+CgogIDwhLS0gVEVYVE86IE5VVFJJw5NMT0dBIENMw41OSUNBIEVTUEVDSUFMSVpBREEgLS0+CiAgPHRleHQgeD0iMTAwIiB5PSIyNTAiCiAgICBmb250LWZhbWlseT0iJ0dlb3JnaWEnLCAnVGltZXMgTmV3IFJvbWFuJywgc2VyaWYiCiAgICBmb250LXNpemU9IjguNSIKICAgIGZvbnQtd2VpZ2h0PSI0MDAiCiAgICBsZXR0ZXItc3BhY2luZz0iMiIKICAgIGZpbGw9IiM1YTcyOTgiCiAgICB0ZXh0LWFuY2hvcj0ibWlkZGxlIgogICAgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+TlVUUknDk0xPR0EgQ0zDjU5JQ0EgRVNQRUNJQUxJWkFEQTwvdGV4dD4KPC9zdmc+Cg==';
+const INST = {
+  nombre:   'Dra. Anayanet Jáquez',
+  titulo:   'Nutrióloga Clínica Especializada',
+  registro: 'Reg. Prof. _______________',
+  um:       'Unión Médica del Norte',
+  mat:      'Clínica Materno',
+  priv:     'Consulta Privada',
+  tel:      '(809) ___-____',
+  email:    'drajaqueznc@gmail.com',
+};
+
 
 // ── STATE ────────────────────────────────────────────────────
 const State = {
@@ -39,6 +51,54 @@ function toast(msg, type = 'ok') {
   el.textContent = msg;
   el.className = `show ${type}`;
   setTimeout(() => el.className = '', 2800);
+}
+
+// ── MODE TOGGLE: Ambulatorio / Hospitalizado ──────────────────
+function setMode(mode) {
+  const isHosp = mode === 'hospitalizado';
+
+  // botones header
+  document.getElementById('modeAmb').classList.toggle('active', !isHosp);
+  document.getElementById('modeHosp').classList.toggle('active', isHosp);
+
+  // acciones header
+  document.getElementById('headerActionsAmb').style.display  = isHosp ? 'none' : 'flex';
+  document.getElementById('headerActionsHosp').style.display = isHosp ? 'flex' : 'none';
+
+  // layout principal
+  document.getElementById('layout').style.display = isHosp ? 'none' : 'flex';
+
+  // panel hospitalizado
+  const panel = document.getElementById('panel-hosp');
+  panel.style.display = isHosp ? 'block' : 'none';
+
+  if (isHosp) {
+    const iframe = document.getElementById('nutricare-iframe');
+    // Cargar solo la primera vez
+    if (!iframe.src || iframe.src === window.location.href) {
+      iframe.src = 'https://nutricare-pro-bf389.web.app';
+    }
+    // Detectar si el iframe fue bloqueado (X-Frame-Options)
+    iframe.onerror = () => {
+      document.getElementById('iframe-fallback').style.display = 'flex';
+      iframe.style.display = 'none';
+    };
+    // Timeout fallback: si en 6s no cargó, mostrar botón
+    if (!iframe._timer) {
+      iframe._timer = setTimeout(() => {
+        try {
+          // Si no hay contenido accesible → bloqueado por CSP
+          const doc = iframe.contentDocument;
+          if (!doc || !doc.body || doc.body.innerHTML === '') {
+            document.getElementById('iframe-fallback').style.display = 'flex';
+            iframe.style.display = 'none';
+          }
+        } catch(e) {
+          // cross-origin error = el iframe SÍ cargó (CORS normal)
+        }
+      }, 6000);
+    }
+  }
 }
 
 // ── VIEW SWITCHER ─────────────────────────────────────────────
@@ -193,7 +253,12 @@ function renderPacienteModal(data) {
   document.getElementById('modalPacienteName').textContent =
     `${p.nombre} ${p.apellidos}`;
   document.getElementById('modalPacienteMeta').innerHTML =
-    `${calcAge(p.fecha_nacimiento)} años · ${p.sexo === 'F' ? 'Femenino' : 'Masculino'} · ${instBadge(p.institucion)} · Cédula: ${p.cedula || '—'}`;
+    `${calcAge(p.fecha_nacimiento)} años · ${p.sexo === 'F' ? 'Femenino' : 'Masculino'} · ${instBadge(p.institucion)} · Cédula: ${p.cedula || '—'}
+    <button onclick="generarPinPaciente(${p.id},'${(p.nombre||'').replace(/'/g,"\\'")}',${!!p.telefono})"
+      style="margin-left:12px;background:#25d366;color:#fff;border:none;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;cursor:pointer;vertical-align:middle"
+      title="${p.telefono ? 'Enviar PIN por WhatsApp al '+p.telefono : 'Sin teléfono registrado'}">
+      ${p.pin_acceso ? '🔑 Reenviar PIN WhatsApp' : '📲 Enviar PIN WhatsApp'}
+    </button>`;
 
   document.getElementById('modalPacienteBody').innerHTML = renderExpediente(p, ant, visitas);
   initExpedienteForms(p, ant);
@@ -409,6 +474,7 @@ async function createVisita() {
     mod_eii: document.getElementById('nv-mod-eii').checked ? 1 : 0,
     mod_farmacoterapia: document.getElementById('nv-mod-farm').checked ? 1 : 0,
     mod_diabetes: document.getElementById('nv-mod-dm').checked ? 1 : 0,
+    mod_renal:    document.getElementById('nv-mod-renal').checked ? 1 : 0,
   };
   const data = await api(`/pacientes/${pid}/visitas`, 'POST', body);
   closeOverlay('overlayNuevaVisita');
@@ -431,40 +497,63 @@ function renderVisitaModal(v) {
   document.getElementById('visitaMeta').innerHTML = instBadge(v.institucion) +
     (v.motivo_consulta ? ` · ${v.motivo_consulta}` : '');
 
+  // Tabs base siempre presentes
   const tabs = [
-    ['cc',   'Composición Corporal'],
-    ['anal', 'Analíticas'],
+    ['cc',   '📋 Antrop.'],
+    ['anal', '🔬 Analíticas'],
     ['diag', '🩺 Diagnóstico'],
-    ['reqs', '🧮 Requerimientos'],
-    ['reg24','Registro 24h'],
-    ['freq', 'Frecuencia Alimentaria'],
-    ['plan', 'Plan Nutricional'],
-    ['cron', 'Cronología'],
+    ['reqs', '🧮 Requerim.'],
+    ['reg24','🍽 Rec. 24h'],
+    ['freq', '📊 Frecuencia'],
+    ['plan', '📝 Plan'],
+    ['cron', '📈 Evolución'],
   ];
-  if (v.mod_obesidad) tabs.push(['ob', 'Obesidad']);
-  if (v.mod_salud_mental) tabs.push(['sm', 'Salud Mental']);
-  if (v.mod_sibo) tabs.push(['sibo', 'SIBO/IMO']);
-  if (v.mod_eii) tabs.push(['eii', 'EII']);
-  if (v.mod_diabetes) tabs.push(['dm', '🩸 Diabetes']);
+  if (v.mod_obesidad)     tabs.push(['ob',    '⚖️ Obesidad']);
+  if (v.mod_salud_mental) tabs.push(['sm',    '🧠 Sal. Mental']);
+  if (v.mod_sibo)         tabs.push(['sibo',  'SIBO/IMO']);
+  if (v.mod_eii)          tabs.push(['eii',   'EII']);
+  if (v.mod_diabetes)     tabs.push(['dm',    '🩸 Diabetes']);
+  if (v.mod_renal)        tabs.push(['renal', '🫘 Renal']);
   tabs.push(['farm', '💊 Fármacos']);
+
+  // LAZY LOADING: solo renderizar el primer tab ahora, el resto al hacer click
+  State._visitaTabs = tabs;
+  State._visitaRendered = new Set(['cc']);
 
   document.getElementById('visitaBody').innerHTML = `
     <div class="tabs" id="visitaTabs">
       ${tabs.map(([id, label], i) => {
         let extra = '';
-        if (id === 'cron')  extra = `;loadCronologia(${v.paciente_id})`;
-        if (id === 'farm')  extra = `;loadFarmacosTab(${v.id})`;
+        if (id === 'cron')  extra = `;lazyRenderTab('${id}',${v.id});loadCronologia(${v.paciente_id})`;
+        else if (id === 'farm') extra = `;lazyRenderTab('${id}',${v.id});loadFarmacosTab(${v.id})`;
+        else                extra = `;lazyRenderTab('${id}',${v.id})`;
         return `<button class="tab-btn ${i===0?'active':''}" onclick="switchTab('visitaContent','vtab-${id}',this)${extra}">${label}</button>`;
       }).join('')}
     </div>
     <div id="visitaContent">
-      ${tabs.map(([id], i) =>
-        `<div class="tab-pane ${i===0?'active':''}" id="vtab-${id}">${renderVisitaTab(id, v)}</div>`
+      <div class="tab-pane active" id="vtab-cc">${renderVisitaTab('cc', v)}</div>
+      ${tabs.slice(1).map(([id]) =>
+        `<div class="tab-pane" id="vtab-${id}"></div>`
       ).join('')}
     </div>
   `;
 
   initVisitaForms(v);
+}
+
+function lazyRenderTab(id, vid) {
+  if (State._visitaRendered?.has(id)) return;
+  State._visitaRendered?.add(id);
+  const el = document.getElementById(`vtab-${id}`);
+  if (!el) return;
+  const v = State.currentVisita;
+  if (!v) return;
+  // farm y cron se cargan por sus propias funciones, solo poner placeholder si no tiene contenido
+  if (id === 'farm') { el.innerHTML = `<div id="farmTabContent"><div class="loading"><div class="spinner"></div> Cargando fármacos…</div></div>`; return; }
+  if (id === 'cron') { el.innerHTML = `<div id="cronologiaContent"><div class="loading"><div class="spinner"></div> Cargando cronología…</div></div>`; return; }
+  el.innerHTML = renderVisitaTab(id, v);
+  if (id === 'reg24') setTimeout(autoCalcR24Macros, 50);
+  if (id === 'anal')  setTimeout(autoCalcAnaliticas,  50);
 }
 
 function renderVisitaTab(id, v) {
@@ -483,7 +572,8 @@ function renderVisitaTab(id, v) {
   if (id === 'sm') return renderTabSaludMental(v.salud_mental || {});
   if (id === 'sibo') return renderTabSibo(v.sibo_imo || {});
   if (id === 'eii') return renderTabEii(v.eii || {});
-  if (id === 'dm')   return renderTabDM(v.diabetes || {}, v);
+  if (id === 'dm')    return renderTabDM(v.diabetes || {}, v);
+  if (id === 'renal') return renderTabRenal(v.renal || {}, v);
   if (id === 'diag') return renderTabDiag(v.diagnostico_nutricional || {}, v);
   if (id === 'reqs') return renderTabReqs(v.requerimientos || {}, v);
   if (id === 'farm') return `<div id="farmTabContent"><div class="loading"><div class="spinner"></div> Cargando fármacos…</div></div>`;
@@ -584,34 +674,127 @@ function renderTabCC(cc) {
   <div style="text-align:right"><button class="btn btn-success" onclick="saveCC()">Guardar composición corporal</button></div>`;
 }
 
+function autoCalcAnaliticas() {
+  const g  = parseFloat(document.getElementById('an-glucemia_ayunas')?.value);
+  const ins = parseFloat(document.getElementById('an-insulina_ayunas')?.value);
+  const ct = parseFloat(document.getElementById('an-colesterol_total')?.value);
+  const hdl= parseFloat(document.getElementById('an-hdl')?.value);
+  const ldl= parseFloat(document.getElementById('an-ldl')?.value);
+  const tg = parseFloat(document.getElementById('an-trigliceridos')?.value);
+  const cr = parseFloat(document.getElementById('an-creatinina')?.value);
+
+  // HOMA-IR
+  if (g && ins) {
+    const homa = (g * ins) / 405;
+    const interp = homa >= 2.5 ? '⚠ Resistencia a insulina' : homa >= 1.8 ? 'Límite' : '✔ Normal';
+    const color  = homa >= 2.5 ? 'var(--danger)' : homa >= 1.8 ? 'var(--warn)' : 'var(--accent2)';
+    document.getElementById('homa-val').textContent = homa.toFixed(2);
+    document.getElementById('homa-interp').textContent = interp;
+    document.getElementById('homa-interp').style.color = color;
+    document.getElementById('homa-display').style.display = 'flex';
+  }
+  // No-HDL
+  if (ct && hdl) {
+    const nohdl = ct - hdl;
+    const stEl  = document.getElementById('an-nohdl');
+    if (stEl) stEl.textContent = nohdl.toFixed(0) + ' mg/dL' + (nohdl > 130 ? ' ⚠' : ' ✔');
+  }
+  // Índice aterogénico
+  if (ct && hdl) {
+    const ia = ct / hdl;
+    const iaEl = document.getElementById('an-ia');
+    if (iaEl) iaEl.textContent = ia.toFixed(2) + (ia > 5 ? ' ⚠ Alto' : ' ✔');
+  }
+  // Colesterol no-HDL badge
+  if (ldl) {
+    const ldlEl = document.getElementById('an-ldl-badge');
+    if (ldlEl) ldlEl.textContent = ldl > 160 ? '⚠ Alto' : ldl < 70 ? '✔ Óptimo' : '✔ Aceptable';
+  }
+  // TG/HDL (RI proxy)
+  if (tg && hdl) {
+    const ratio = tg / hdl;
+    const el = document.getElementById('an-tg-hdl');
+    if (el) {
+      el.textContent = ratio.toFixed(2) + (ratio > 3 ? ' ⚠ RI probable' : ' ✔');
+      el.style.color  = ratio > 3 ? 'var(--danger)' : 'var(--accent2)';
+    }
+  }
+  // eGFR (si hay paciente cargado)
+  if (cr) {
+    const pac = State.currentPaciente;
+    if (pac?.fecha_nacimiento && pac?.sexo) {
+      const hoy = new Date(); const dob = new Date(pac.fecha_nacimiento);
+      const edad = hoy.getFullYear() - dob.getFullYear() - ((hoy.getMonth()<dob.getMonth()||hoy.getMonth()===dob.getMonth()&&hoy.getDate()<dob.getDate())?1:0);
+      const sexo = pac.sexo;
+      const kappa = sexo==='F' ? 0.7 : 0.9;
+      const alpha = sexo==='F' ? -0.241 : -0.302;
+      const sex_f = sexo==='F' ? 1.012 : 1.0;
+      const ratio = cr / kappa;
+      const egfr  = 142 * Math.pow(ratio < 1 ? ratio : ratio, ratio < 1 ? alpha : -1.2) * Math.pow(0.9938, edad) * sex_f;
+      const estadio = egfr>=90?'G1 ≥90':egfr>=60?'G2 60-89':egfr>=45?'G3a 45-59':egfr>=30?'G3b 30-44':egfr>=15?'G4 15-29':'G5 <15';
+      const color   = egfr >= 60 ? 'var(--accent2)' : egfr >= 30 ? 'var(--warn)' : 'var(--danger)';
+      const el = document.getElementById('an-egfr');
+      if (el) { el.textContent = `${egfr.toFixed(0)} mL/min — ${estadio}`; el.style.color = color; }
+    }
+  }
+}
+
 function renderTabAnaliticas(an) {
-  const f = (id, val, unit='', step='1') =>
-    `<div class="field"><label>${id.replace(/_/g,' ')}</label><div class="field-wrap"><input type="number" step="${step}" id="an-${id}" value="${val||''}"><span class="field-unit">${unit}</span></div></div>`;
+  const f = (id, val, unit='', step='1', extra='') =>
+    `<div class="field"><label>${{
+      glucemia_ayunas:'Glucemia ayunas',insulina_ayunas:'Insulina basal',
+      hba1c:'HbA1c',glucemia_2h:'Glucemia 2h postprandial',
+      colesterol_total:'Colesterol total',ldl:'LDL',hdl:'HDL',
+      trigliceridos:'Triglicéridos',apob:'ApoB',creatinina:'Creatinina',
+      urea:'Urea',acido_urico:'Ácido úrico',microalbuminuria:'Microalbuminuria',
+      alt:'ALT (TGP)',ast:'AST (TGO)',ggt:'GGT',fosfatasa_alcalina:'Fosfatasa alcalina',
+      bilirrubina_total:'Bilirrubina total',tsh:'TSH',t4_libre:'T4 libre',
+      pcr_us:'PCR ultrasensible',vitamina_d:'Vitamina D 25-OH',
+      vitamina_b12:'Vitamina B12',folato:'Folato sérico',
+      magnesio:'Magnesio',zinc:'Zinc',ferritina:'Ferritina',
+      hierro_serico:'Hierro sérico',hemoglobina:'Hemoglobina',
+      albumina:'Albúmina',prealbumin:'Prealbúmina',proteinas_totales:'Proteínas totales'
+    }[id]||id.replace(/_/g,' ')}</label>
+    <div class="field-wrap"><input type="number" step="${step}" id="an-${id}" value="${val||''}" oninput="autoCalcAnaliticas()" ${extra}><span class="field-unit">${unit}</span></div></div>`;
 
   return `
   <div class="card" style="margin-bottom:12px">
-    <div class="card-title">Glucometabolismo</div>
+    <div class="card-title">🩸 Glucometabolismo</div>
     <div class="g4">
       ${f('glucemia_ayunas', an.glucemia_ayunas, 'mg/dL', '0.1')}
       ${f('insulina_ayunas', an.insulina_ayunas, 'μUI/mL', '0.01')}
       ${f('hba1c', an.hba1c, '%', '0.1')}
       ${f('glucemia_2h', an.glucemia_2h, 'mg/dL', '0.1')}
     </div>
-    <div id="homa-display" style="${an.homa_ir ? '' : 'display:none'};margin-top:10px;padding:12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;display:flex;gap:16px;align-items:center">
-      <div><div class="mono" style="font-size:22px;font-weight:700" id="homa-val">${an.homa_ir ? an.homa_ir.toFixed(2) : '—'}</div><div style="font-size:11px;color:var(--muted)">HOMA-IR</div></div>
-      <div style="flex:1;padding-left:14px;border-left:1px solid var(--border)"><span id="homa-interp">${an.homa_interpretacion || '—'}</span><div style="font-size:11px;color:var(--muted);margin-top:3px">Matthews DR et al. Diabetologia 1985. PMID: 3899825</div></div>
+    <div id="homa-display" style="${an.homa_ir ? 'display:flex' : 'display:none'};margin-top:10px;padding:12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;gap:16px;align-items:center">
+      <div><div class="mono" style="font-size:22px;font-weight:700;color:var(--accent)" id="homa-val">${an.homa_ir ? an.homa_ir.toFixed(2) : '—'}</div><div style="font-size:11px;color:var(--muted)">HOMA-IR</div></div>
+      <div style="flex:1;padding-left:14px;border-left:1px solid var(--border)"><span id="homa-interp" style="font-weight:600">${an.homa_interpretacion || '—'}</span><div style="font-size:11px;color:var(--muted);margin-top:3px">Matthews DR et al. Diabetologia 1985</div></div>
+      <div style="text-align:center;padding-left:14px;border-left:1px solid var(--border)">
+        <div style="font-size:11px;color:var(--muted)">TG/HDL</div>
+        <div class="mono" style="font-size:16px;font-weight:700" id="an-tg-hdl">
+          ${an.trigliceridos && an.hdl ? (an.trigliceridos/an.hdl).toFixed(2) : '—'}
+        </div>
+      </div>
     </div>
   </div>
   <div class="card" style="margin-bottom:12px">
-    <div class="card-title">Perfil lipídico</div>
+    <div class="card-title">❤️ Perfil lipídico</div>
     <div class="g4">
       ${f('colesterol_total', an.colesterol_total, 'mg/dL')}
       ${f('ldl', an.ldl, 'mg/dL')}
       ${f('hdl', an.hdl, 'mg/dL')}
       ${f('trigliceridos', an.trigliceridos, 'mg/dL')}
       ${f('apob', an.apob, 'mg/dL')}
-      <div class="field"><label>No-HDL</label><div class="computed" id="an-nohdl">${an.no_hdl ? an.no_hdl + ' mg/dL' : '—'}</div></div>
-      <div class="field"><label>Índice aterogénico</label><div class="computed" id="an-ia">${an.indice_aterogenico || '—'}</div></div>
+      <div class="field"><label>No-HDL <span style="font-size:10px;color:var(--muted)">(auto)</span></label>
+        <div class="computed" id="an-nohdl" style="font-size:14px;font-weight:700">
+          ${an.no_hdl ? an.no_hdl + ' mg/dL' + (an.no_hdl > 130 ? ' ⚠' : ' ✔') : '—'}
+        </div>
+      </div>
+      <div class="field"><label>Índice aterogénico <span style="font-size:10px;color:var(--muted)">(auto)</span></label>
+        <div class="computed" id="an-ia" style="font-size:14px;font-weight:700">
+          ${an.indice_aterogenico ? an.indice_aterogenico.toFixed(2) + (an.indice_aterogenico > 5 ? ' ⚠ Alto' : ' ✔') : '—'}
+        </div>
+      </div>
     </div>
   </div>
   <div class="g2" style="gap:12px">
@@ -662,34 +845,130 @@ function renderTabAnaliticas(an) {
   <div style="text-align:right"><button class="btn btn-success" onclick="saveAnaliticas()">Guardar analíticas</button></div>`;
 }
 
+function autoCalcR24Macros() {
+  const p = parseFloat(document.getElementById('r24-prot')?.value) || 0;
+  const c = parseFloat(document.getElementById('r24-cho')?.value)  || 0;
+  const g = parseFloat(document.getElementById('r24-fat')?.value)  || 0;
+  if (p || c || g) {
+    const kcal = Math.round(p * 4 + c * 4 + g * 9);
+    const el = document.getElementById('r24-kcal');
+    if (el) { el.value = kcal; el.style.fontWeight='700'; el.style.color='var(--accent)'; }
+    // barra de macros
+    const total = p*4 + c*4 + g*9 || 1;
+    const pPct = Math.round(p*4/total*100);
+    const cPct = Math.round(c*4/total*100);
+    const gPct = Math.round(g*9/total*100);
+    const barEl = document.getElementById('r24-macro-bar');
+    const lblEl = document.getElementById('r24-macro-lbl');
+    if (barEl) barEl.innerHTML = `
+      <div style="height:10px;display:flex;border-radius:5px;overflow:hidden;margin-top:6px">
+        <div style="width:${pPct}%;background:#4f8ef7" title="Proteína ${pPct}%"></div>
+        <div style="width:${cPct}%;background:#34c78a" title="CHO ${cPct}%"></div>
+        <div style="width:${gPct}%;background:#f0a742" title="Grasa ${gPct}%"></div>
+      </div>`;
+    if (lblEl) lblEl.innerHTML = `
+      <span style="color:#4f8ef7">■ Prot ${pPct}%</span> &nbsp;
+      <span style="color:#34c78a">■ CHO ${cPct}%</span> &nbsp;
+      <span style="color:#f0a742">■ Grasa ${gPct}%</span> &nbsp;
+      <strong style="color:var(--text)">${kcal} kcal totales</strong>`;
+
+    // comparar con requerimientos
+    const req = State.currentVisita?.requerimientos || {};
+    if (req.kcal_objetivo && kcal) {
+      const diff = kcal - req.kcal_objetivo;
+      const compEl = document.getElementById('r24-vs-req');
+      if (compEl) {
+        compEl.style.display = 'block';
+        compEl.innerHTML = diff > 200
+          ? `⚠ Excede la meta en <strong>+${diff} kcal</strong> (meta: ${req.kcal_objetivo} kcal)`
+          : diff < -200
+          ? `⚠ Por debajo de la meta en <strong>${diff} kcal</strong> (meta: ${req.kcal_objetivo} kcal)`
+          : `✔ Dentro de la meta calórica (meta: ${req.kcal_objetivo} kcal, reportado: ${kcal} kcal)`;
+        compEl.style.color = Math.abs(diff) > 200 ? 'var(--warn)' : 'var(--accent2)';
+      }
+    }
+  }
+}
+
 function renderTabReg24(r24) {
   const meals = [
-    ['desayuno','Desayuno'],['media_manana','Media mañana'],
-    ['almuerzo','Almuerzo'],['merienda','Merienda'],
-    ['cena','Cena'],['otros','Otros / colaciones']
+    ['desayuno','🌅 Desayuno'],['media_manana','🍎 Media mañana'],
+    ['almuerzo','🍽 Almuerzo'],['merienda','☕ Merienda'],
+    ['cena','🌙 Cena'],['otros','🍬 Colaciones / otros']
   ];
+  const p = r24.proteinas_g || 0, c = r24.carbohidratos_g || 0, gf = r24.grasas_g || 0;
+  const totalKcalMacro = p*4 + c*4 + gf*9;
+  const pPct = totalKcalMacro ? Math.round(p*4/totalKcalMacro*100) : 0;
+  const cPct = totalKcalMacro ? Math.round(c*4/totalKcalMacro*100) : 0;
+  const gPct = totalKcalMacro ? Math.round(gf*9/totalKcalMacro*100) : 0;
+
   return `
   <div class="card">
-    <div class="card-title">Recordatorio 24 horas</div>
+    <div class="card-title">Recordatorio de 24 horas
+      <span style="float:right;font-size:11px;font-weight:400;color:var(--muted)">Describa los alimentos y porciones de cada tiempo</span>
+    </div>
     <div class="g2">
-      ${meals.map(([k,l]) => `<div class="field"><label>${l}</label><textarea id="r24-${k}" style="min-height:55px">${r24[k]||''}</textarea></div>`).join('')}
+      ${meals.map(([k,l]) => `
+        <div class="field">
+          <label>${l}</label>
+          <textarea id="r24-${k}" style="min-height:60px;font-size:12px" placeholder="Ej: 2 huevos revueltos, 2 tostadas integrales, café con leche 1 taza">${r24[k]||''}</textarea>
+        </div>`).join('')}
     </div>
-    <div class="divider"></div>
-    <div class="g4" style="margin-top:4px">
-      <div class="field"><label>kcal estimadas</label><input type="number" id="r24-kcal" value="${r24.kcal_estimadas||''}"></div>
-      <div class="field"><label>Proteínas (g)</label><input type="number" step="0.1" id="r24-prot" value="${r24.proteinas_g||''}"></div>
-      <div class="field"><label>Carbohidratos (g)</label><input type="number" step="0.1" id="r24-cho" value="${r24.carbohidratos_g||''}"></div>
-      <div class="field"><label>Grasas (g)</label><input type="number" step="0.1" id="r24-fat" value="${r24.grasas_g||''}"></div>
-      <div class="field"><label>Fibra (g)</label><input type="number" step="0.1" id="r24-fibra" value="${r24.fibra_g||''}"></div>
-      <div class="field"><label>Agua (L)</label><input type="number" step="0.1" id="r24-agua" value="${r24.agua_l||''}"></div>
-      <div class="field"><label>¿Día típico?</label><select id="r24-tipico">
-        <option value="1" ${r24.dia_tipico!==0?'selected':''}>Sí</option>
-        <option value="0" ${r24.dia_tipico===0?'selected':''}>No</option>
-      </select></div>
-    </div>
-    <div class="field" style="margin-top:8px"><label>Observaciones</label><textarea id="r24-obs">${r24.observaciones||''}</textarea></div>
   </div>
-  <div style="text-align:right"><button class="btn btn-success" onclick="saveReg24()">Guardar registro 24h</button></div>`;
+
+  <div class="card">
+    <div class="card-title">📊 Análisis nutricional estimado</div>
+    <div class="g4" style="margin-bottom:12px">
+      <div class="field"><label>Proteínas (g)</label>
+        <div class="field-wrap"><input type="number" step="0.1" id="r24-prot" value="${r24.proteinas_g||''}" oninput="autoCalcR24Macros()"><span class="field-unit">g</span></div>
+      </div>
+      <div class="field"><label>Carbohidratos (g)</label>
+        <div class="field-wrap"><input type="number" step="0.1" id="r24-cho" value="${r24.carbohidratos_g||''}" oninput="autoCalcR24Macros()"><span class="field-unit">g</span></div>
+      </div>
+      <div class="field"><label>Grasas (g)</label>
+        <div class="field-wrap"><input type="number" step="0.1" id="r24-fat" value="${r24.grasas_g||''}" oninput="autoCalcR24Macros()"><span class="field-unit">g</span></div>
+      </div>
+      <div class="field"><label>kcal totales <span style="font-size:10px;color:var(--accent)">⚡ Auto</span></label>
+        <div class="field-wrap"><input type="number" id="r24-kcal" class="computed" value="${r24.kcal_estimadas||''}" placeholder="Auto" readonly style="font-weight:700;color:var(--accent);background:#eff6ff;border-color:#bfdbfe"><span class="field-unit">kcal</span></div>
+      </div>
+      <div class="field"><label>Fibra (g)</label>
+        <div class="field-wrap"><input type="number" step="0.1" id="r24-fibra" value="${r24.fibra_g||''}"><span class="field-unit">g</span></div>
+      </div>
+      <div class="field"><label>Agua (L)</label>
+        <div class="field-wrap"><input type="number" step="0.1" id="r24-agua" value="${r24.agua_l||''}"><span class="field-unit">L</span></div>
+      </div>
+      <div class="field"><label>¿Día típico?</label>
+        <select id="r24-tipico">
+          <option value="1" ${r24.dia_tipico!==0?'selected':''}>Sí, representativo</option>
+          <option value="0" ${r24.dia_tipico===0?'selected':''}>No, día atípico</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Barra de macros -->
+    <div id="r24-macro-bar">
+      ${totalKcalMacro ? `<div style="height:10px;display:flex;border-radius:5px;overflow:hidden;margin-top:6px">
+        <div style="width:${pPct}%;background:#4f8ef7"></div>
+        <div style="width:${cPct}%;background:#34c78a"></div>
+        <div style="width:${gPct}%;background:#f0a742"></div>
+      </div>` : ''}
+    </div>
+    <div id="r24-macro-lbl" style="font-size:11px;margin-top:6px;display:flex;gap:14px;flex-wrap:wrap">
+      ${totalKcalMacro ? `
+        <span style="color:#4f8ef7">■ Prot ${pPct}%</span>
+        <span style="color:#34c78a">■ CHO ${cPct}%</span>
+        <span style="color:#f0a742">■ Grasa ${gPct}%</span>
+        <strong style="color:var(--text)">${r24.kcal_estimadas||Math.round(totalKcalMacro)} kcal totales</strong>` : ''}
+    </div>
+
+    <!-- vs requerimientos -->
+    <div id="r24-vs-req" style="display:none;margin-top:10px;padding:8px 12px;border-radius:8px;font-size:12px;background:var(--bg);border:1px solid var(--border)"></div>
+
+    <div class="field" style="margin-top:12px"><label>Observaciones / patrón dietético</label>
+      <textarea id="r24-obs" rows="2" placeholder="Calidad de la dieta, preferencias, aversiones, contexto cultural…">${r24.observaciones||''}</textarea>
+    </div>
+  </div>
+  <div style="text-align:right"><button class="btn btn-success" onclick="saveReg24()">Guardar recordatorio 24h</button></div>`;
 }
 
 const FREQ_GROUPS = ['Cereales y tubérculos','Leguminosas','Vegetales','Frutas',
@@ -758,6 +1037,17 @@ function renderTabPlan(plan) {
 }
 
 function renderTabObesidad(ob, cc, an) {
+  const escalonOpts = [
+    ['estilo_vida',    '🥗 Nutrición + estilo de vida'],
+    ['tre',            '⏱ TRE (alimentación restringida en tiempo)'],
+    ['ejercicio',      '🏃 Ejercicio estructurado'],
+    ['metformina',     '💊 Metformina'],
+    ['glp1',           '💉 Agonista GLP-1'],
+    ['gip_glp1',       '💉 Agonista GIP/GLP-1 (tirzepatida)'],
+    ['combinada',      '🔗 Terapia combinada'],
+    ['endoscopia',     '🔭 Evaluación endoscópica / ESG'],
+    ['cirugia',        '⚕ Evaluación quirúrgica'],
+  ];
   return `
   <div class="card">
     <div class="card-title">Clasificación y estadificación</div>
@@ -784,6 +1074,83 @@ function renderTabObesidad(ob, cc, an) {
       · Demircan K et al. Nat Med 2026.
     </div>` : ''}
   </div>
+
+  <!-- ── PATRÓN HORARIO (TRE / TREAD) ────────────────────── -->
+  <div class="card">
+    <div class="card-title">⏱ Patrón horario de alimentación <span style="font-size:11px;font-weight:400;color:var(--muted)">TREAD 2024 · TRE 10 h → −4.6% peso, ↓ grasa visceral</span></div>
+    <div class="g4">
+      <div class="field"><label>Hora primera ingesta</label>
+        <input type="time" id="ob-h-primera" value="${ob.hora_primera_ingesta||''}">
+      </div>
+      <div class="field"><label>Hora última ingesta</label>
+        <input type="time" id="ob-h-ultima" value="${ob.hora_ultima_ingesta||''}">
+      </div>
+      <div class="field"><label>Ventana alimentaria habitual</label>
+        <select id="ob-ventana">
+          <option value="">—</option>
+          <option value="<10h"  ${ob.ventana_alimentaria==='<10h' ?'selected':''}>&lt;10 h (TRE estricto)</option>
+          <option value="10-12h"${ob.ventana_alimentaria==='10-12h'?'selected':''}>10–12 h (TRE moderado)</option>
+          <option value="12-14h"${ob.ventana_alimentaria==='12-14h'?'selected':''}>12–14 h (estándar)</option>
+          <option value=">14h"  ${ob.ventana_alimentaria==='>14h' ?'selected':''}>&gt;14 h (ventana amplia)</option>
+        </select>
+      </div>
+      <div class="field"><label>TRE prescrito</label>
+        <select id="ob-tre-pres">
+          <option value="">—</option>
+          <option value="no"     ${ob.tre_prescrito==='no'    ?'selected':''}>No</option>
+          <option value="8h"     ${ob.tre_prescrito==='8h'    ?'selected':''}>TRE 8 h (16:8)</option>
+          <option value="10h"    ${ob.tre_prescrito==='10h'   ?'selected':''}>TRE 10 h ✦ TREAD</option>
+          <option value="12h"    ${ob.tre_prescrito==='12h'   ?'selected':''}>TRE 12 h</option>
+          <option value="5:2"    ${ob.tre_prescrito==='5:2'   ?'selected':''}>Ayuno 5:2</option>
+        </select>
+      </div>
+      <div class="field" style="grid-column:span 2"><label>Horario prescrito</label>
+        <input id="ob-tre-horario" placeholder="Ej: primera ingesta 8:00 am · última 6:00 pm · agua/café sin calorías fuera" value="${ob.tre_horario||''}">
+      </div>
+      <div class="field"><label>Semanas en TRE</label>
+        <input type="number" id="ob-tre-sem" value="${ob.tre_semanas||''}" min="0" placeholder="0">
+      </div>
+      <div class="field"><label>Adherencia TRE</label>
+        <select id="ob-tre-adh">
+          <option value="">—</option>
+          <option value="alta"   ${ob.tre_adherencia==='alta'  ?'selected':''}>Alta (&gt;5 d/sem)</option>
+          <option value="media"  ${ob.tre_adherencia==='media' ?'selected':''}>Media (3–4 d/sem)</option>
+          <option value="baja"   ${ob.tre_adherencia==='baja'  ?'selected':''}>Baja (&lt;3 d/sem)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ESCALÓN TERAPÉUTICO (POWER 2026) ─────────────────── -->
+  <div class="card">
+    <div class="card-title">⚕ Escalón terapéutico actual <span style="font-size:11px;font-weight:400;color:var(--muted)">POWER 2026 — enfoque escalonado y complementario</span></div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px">
+      ${escalonOpts.map(([k,l]) => `
+        <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:13px;background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:5px 14px;transition:.15s"
+               onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+          <input type="checkbox" id="ob-esc-${k}" ${ob['escal_'+k]?'checked':''}> ${l}
+        </label>`).join('')}
+    </div>
+    <div class="g2">
+      <div class="field"><label>Tiempo en tratamiento actual</label>
+        <input id="ob-esc-tiempo" placeholder="Ej: 3 meses con GLP-1 + TRE" value="${ob.escal_tiempo||''}">
+      </div>
+      <div class="field"><label>Respuesta al tratamiento</label>
+        <select id="ob-esc-resp">
+          <option value="">—</option>
+          <option value="excelente" ${ob.escal_respuesta==='excelente'?'selected':''}>Excelente (&gt;10% peso)</option>
+          <option value="buena"     ${ob.escal_respuesta==='buena'    ?'selected':''}>Buena (5–10%)</option>
+          <option value="parcial"   ${ob.escal_respuesta==='parcial'  ?'selected':''}>Parcial (2–5%)</option>
+          <option value="nula"      ${ob.escal_respuesta==='nula'     ?'selected':''}>Sin respuesta (&lt;2%)</option>
+        </select>
+      </div>
+      <div class="field" style="grid-column:span 2"><label>Plan de escalada / ajuste</label>
+        <textarea id="ob-esc-plan" rows="2" placeholder="Ej: Agregar tirzepatida si no respuesta a 12 sem con semaglutida + TRE 10h">${ob.escal_plan||''}</textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── COMPLICACIONES ─────────────────────────────────────── -->
   <div class="card">
     <div class="card-title">Complicaciones relacionadas con obesidad</div>
     <div class="g4">
@@ -1210,21 +1577,47 @@ async function savePlan() {
 async function saveObesidad() {
   const vid = State.currentVisita?.id;
   if (!vid) return;
+  const g = id => document.getElementById(id);
+  const chk = id => g(id)?.checked ? 1 : 0;
   const body = {
-    obesidad_prec_clinica: document.getElementById('ob-tipo')?.value,
-    estadio: document.getElementById('ob-estadio')?.value,
-    riesgo_cardio: document.getElementById('ob-riesgo')?.value,
-    comp_dm2: document.getElementById('ob-dm2')?.checked ? 1 : 0,
-    comp_hta: document.getElementById('ob-hta')?.checked ? 1 : 0,
-    comp_dislipidemia: document.getElementById('ob-dislipidemia')?.checked ? 1 : 0,
-    comp_higado_graso: document.getElementById('ob-higado_graso')?.checked ? 1 : 0,
-    comp_saos: document.getElementById('ob-saos')?.checked ? 1 : 0,
-    comp_artrosis: document.getElementById('ob-artrosis')?.checked ? 1 : 0,
-    comp_depresion: document.getElementById('ob-depresion')?.checked ? 1 : 0,
-    comp_otras: document.getElementById('ob-otras')?.value,
+    // Clasificación
+    obesidad_prec_clinica: g('ob-tipo')?.value,
+    estadio:               g('ob-estadio')?.value,
+    riesgo_cardio:         g('ob-riesgo')?.value,
+    // TRE / patrón horario
+    hora_primera_ingesta:  g('ob-h-primera')?.value,
+    hora_ultima_ingesta:   g('ob-h-ultima')?.value,
+    ventana_alimentaria:   g('ob-ventana')?.value,
+    tre_prescrito:         g('ob-tre-pres')?.value,
+    tre_horario:           g('ob-tre-horario')?.value,
+    tre_semanas:           parseInt(g('ob-tre-sem')?.value)||null,
+    tre_adherencia:        g('ob-tre-adh')?.value,
+    // Escalón terapéutico
+    escal_estilo_vida: chk('ob-esc-estilo_vida'),
+    escal_tre:         chk('ob-esc-tre'),
+    escal_ejercicio:   chk('ob-esc-ejercicio'),
+    escal_metformina:  chk('ob-esc-metformina'),
+    escal_glp1:        chk('ob-esc-glp1'),
+    escal_gip_glp1:    chk('ob-esc-gip_glp1'),
+    escal_combinada:   chk('ob-esc-combinada'),
+    escal_endoscopia:  chk('ob-esc-endoscopia'),
+    escal_cirugia:     chk('ob-esc-cirugia'),
+    escal_tiempo:      g('ob-esc-tiempo')?.value,
+    escal_respuesta:   g('ob-esc-resp')?.value,
+    escal_plan:        g('ob-esc-plan')?.value,
+    // Complicaciones
+    comp_dm2:          chk('ob-dm2'),
+    comp_hta:          chk('ob-hta'),
+    comp_dislipidemia: chk('ob-dislipidemia'),
+    comp_higado_graso: chk('ob-higado_graso'),
+    comp_saos:         chk('ob-saos'),
+    comp_artrosis:     chk('ob-artrosis'),
+    comp_depresion:    chk('ob-depresion'),
+    comp_otras:        g('ob-otras')?.value,
   };
   const res = await api(`/visitas/${vid}/obesidad`, 'POST', body);
-  toast(`OBSCORE: ${res?.obscore_pct}% — ${res?.obscore_nivel} ✓`);
+  if (res?.obscore_pct != null) toast(`OBSCORE: ${res.obscore_pct}% — ${res.obscore_nivel} ✓`);
+  else toast('Módulo obesidad guardado ✓');
 }
 
 async function saveSaludMental() {
@@ -1664,8 +2057,10 @@ const SEMAFORO_LABEL = { verde: '✓ Seguro', amarillo: '⚠ Precaución', rojo:
 
 // Estado local del tab de fármacos
 const FarmState = {
-  catalogo: [],          // todos los fármacos del catálogo
-  visita_farmacos: [],   // fármacos de esta visita
+  catalogo: [],
+  visita_farmacos: [],
+  efectos_adversos: [],
+  cambios: [],
   egfr: null,
   estadio: null,
   vid: null,
@@ -1699,6 +2094,52 @@ async function loadFarmacosTab(vid) {
   setTimeout(() => loadInteraccionesVisita(), 100);
 }
 
+// ── RECOMENDACIONES DE FÁRMACOS POR DIAGNÓSTICO ─────────────
+function farmRecomendacionesPorCaso() {
+  const v   = State.currentVisita || {};
+  const an  = v.analiticas || {};
+  const cc  = v.composicion_corporal || {};
+  const diag = v.diagnostico_nutricional || {};
+  const tips = [];
+
+  const imc = cc.imc || (cc.peso && cc.talla ? cc.peso/((cc.talla/100)**2) : null);
+  const gluc = an.glucemia_ayunas;
+  const hba1c = an.hba1c;
+  const ldl   = an.ldl;
+  const tg    = an.trigliceridos;
+  const hdl   = an.hdl;
+  const ptas  = an.presion_sistolica;
+  const vitd  = an.vitamina_d;
+  const b12   = an.vitamina_b12;
+  const ferr  = an.ferritina;
+  const hb    = an.hemoglobina;
+  const egfr  = an.egfr;
+  const tsh   = an.tsh;
+
+  if (imc >= 30) tips.push({ grupo:'Obesidad', icon:'⚖️', texto:'Considerar: Semaglutida, Liraglutida, Tirzepatida (GLP-1/GIP). Evaluar elegibilidad para farmacoterapia anti-obesidad.', urgencia:'info' });
+  if (gluc >= 100 || hba1c >= 5.7) tips.push({ grupo:'Glucometabolismo', icon:'🩸', texto:`Glucemia ${gluc||'?'} mg/dL | HbA1c ${hba1c||'?'}%. ${hba1c>=6.5||gluc>=126?'DM confirmada — revisar metformina, inhibidores SGLT-2, GLP-1.':'Prediabetes — considerar metformina preventiva si IMC ≥35 o progresión rápida.'}`, urgencia: hba1c>=6.5||gluc>=126 ? 'warn' : 'info' });
+  if (ldl >= 130 || tg >= 150) tips.push({ grupo:'Dislipidemia', icon:'❤️', texto:`LDL ${ldl||'?'} mg/dL | TG ${tg||'?'} mg/dL. ${ldl>=160?'Estatinas de alta intensidad (Rosuvastatina 20-40mg, Atorvastatina 40-80mg).':ldl>=130?'Estatinas moderadas.':''} ${tg>=500?'TG críticos — Fibratos + ácidos grasos omega-3.':tg>=200?'Fibratos o Omega-3 si TG persisten.':''}`, urgencia: ldl>=160||tg>=500 ? 'warn' : 'info' });
+  if (vitd && vitd < 30) tips.push({ grupo:'Micronutrientes', icon:'☀️', texto:`Vitamina D ${vitd} ng/mL — ${vitd<20?'Deficiencia: colecalciferol 50,000 UI/sem × 8-12 sem, luego mantenimiento 1,000-2,000 UI/día.':'Insuficiencia: colecalciferol 1,000-2,000 UI/día.'}`, urgencia:'info' });
+  if (b12 && b12 < 300) tips.push({ grupo:'Micronutrientes', icon:'💊', texto:`Vitamina B12 ${b12} pg/mL — Suplementación: cianocobalamina o metilcobalamina 1,000-2,000 mcg/día VO, o 1,000 mcg IM mensual si malabsorción.`, urgencia:'info' });
+  if ((ferr && ferr < 30) || (hb && hb < 12)) tips.push({ grupo:'Anemia', icon:'🔴', texto:`Ferritina ${ferr||'?'} ng/mL | Hb ${hb||'?'} g/dL. ${hb<10?'Anemia severa — considerar hierro IV (sacarosa/carboximaltosa).':'Hierro oral: sulfato ferroso 300mg o gluconato ferroso con vitamina C en ayunas.'}`, urgencia: hb && hb<10 ? 'warn' : 'info' });
+  if (egfr && egfr < 60) tips.push({ grupo:'ERC', icon:'🫘', texto:`eGFR ${egfr.toFixed(0)} mL/min (${an.egfr_estadio}). Ajustar dosis de metformina (suspender <30), evitar AINEs, revisar contraste nefrotóxico. Quelantes de fósforo si P>5.5.`, urgencia: egfr<30 ? 'warn' : 'info' });
+  if (tsh && tsh > 4.5) tips.push({ grupo:'Tiroides', icon:'🦋', texto:`TSH ${tsh} mIU/L — Hipotiroidismo probable. Iniciar/ajustar levotiroxina. Meta TSH 0.5-2.5 mIU/L.`, urgencia:'warn' });
+  if (tsh && tsh < 0.4) tips.push({ grupo:'Tiroides', icon:'🦋', texto:`TSH ${tsh} mIU/L — Hipertiroidismo. Derivar a endocrinología. Revisar interacciones con nutrición (calcio, hierro, etc.).`, urgencia:'warn' });
+
+  if (!tips.length) return '';
+
+  return `
+  <div class="card" style="margin-bottom:14px;border-left:4px solid var(--accent)">
+    <div class="card-title">💡 Recomendaciones farmacológicas según este caso</div>
+    ${tips.map(t => `
+      <div style="padding:10px 12px;margin-bottom:8px;border-radius:8px;background:${t.urgencia==='warn'?'#fef3c7':'#eff6ff'};border:1px solid ${t.urgencia==='warn'?'#fde68a':'#bfdbfe'}">
+        <div style="font-weight:600;font-size:12px;color:${t.urgencia==='warn'?'var(--warn)':'var(--accent)'};margin-bottom:3px">${t.icon} ${t.grupo}</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">${t.texto}</div>
+      </div>`).join('')}
+    <div style="font-size:10px;color:var(--muted);margin-top:4px">⚠ Recomendaciones automáticas orientativas. Decisión clínica final a criterio del médico tratante.</div>
+  </div>`;
+}
+
 function renderFarmTab() {
   const el = document.getElementById('farmTabContent');
   if (!el) return;
@@ -1710,20 +2151,33 @@ function renderFarmTab() {
   const clases = [...new Set(FarmState.catalogo.map(f => f.clase))].sort();
 
   el.innerHTML = `
-  <!-- ALERTA eGFR -->
+  <!-- BUSCADOR GLOBAL RÁPIDO -->
+  <div style="position:relative;margin-bottom:14px">
+    <svg style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="farm-busqueda-global" placeholder="Buscar fármaco por nombre genérico o comercial…"
+      oninput="onFarmBusquedaGlobal()"
+      style="width:100%;padding:10px 12px 10px 38px;background:var(--surface);border:2px solid var(--border);border-radius:10px;color:var(--text);font-size:14px;outline:none;transition:border .15s"
+      onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+    <div id="farm-busqueda-resultados" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-top:4px;z-index:100;max-height:300px;overflow-y:auto;box-shadow:var(--shadow)"></div>
+  </div>
+
+  <!-- RECOMENDACIONES POR CASO -->
+  ${farmRecomendacionesPorCaso()}
+
+  <!-- ALERTA eGFR + BOTONES -->
   <div class="card" style="border-top:3px solid var(--accent);margin-bottom:12px">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
       <div>
-        <div style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em">eGFR usado para semáforo</div>
+        <div style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em">eGFR para semáforo renal</div>
         <div style="margin-top:4px;font-size:14px">${egfrStr}</div>
       </div>
-      <div style="display:flex;gap:8px;align-items:center">
-        <span style="font-size:11px;color:var(--muted)">Modalidad especial:</span>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
         <select id="farm-estadio-override" onchange="onFarmEstadioOverride()" style="background:var(--bg2);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:4px 8px;font-size:12px">
           <option value="">— Calculado de eGFR —</option>
           <option value="HD">Hemodiálisis (HD)</option>
           <option value="DP">Diálisis Peritoneal (DP)</option>
         </select>
+        <button class="btn btn-ghost btn-sm" onclick="imprimirReceta()">🖨 Imprimir receta</button>
       </div>
     </div>
   </div>
@@ -1732,18 +2186,18 @@ function renderFarmTab() {
   <div style="display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap">
     ${Object.entries(SEMAFORO_CSS).map(([k,c]) => `
       <div style="display:flex;align-items:center;gap:6px;font-size:12px">
-        <span style="width:12px;height:12px;border-radius:50%;background:${c};display:inline-block"></span>
+        <span style="width:10px;height:10px;border-radius:50%;background:${c};display:inline-block"></span>
         <span>${SEMAFORO_LABEL[k]}</span>
       </div>`).join('')}
   </div>
 
-  <!-- PANEL INTERACCIONES (se rellena automáticamente) -->
+  <!-- PANEL INTERACCIONES -->
   <div id="farm-interacciones-panel"></div>
 
   <!-- FÁRMACOS DE ESTA VISITA -->
   <div class="card" style="margin-bottom:16px">
     <div class="card-title" style="display:flex;justify-content:space-between;align-items:center">
-      <span>Fármacos registrados en esta visita</span>
+      <span>💊 Fármacos registrados en esta visita</span>
       <button class="btn btn-primary btn-sm" onclick="openAddFarmacoModal()">+ Agregar fármaco</button>
     </div>
     <div id="farm-visita-list">
@@ -1751,7 +2205,7 @@ function renderFarmTab() {
     </div>
   </div>
 
-  <!-- CATÁLOGO / SEMÁFORO COMPLETO -->
+  <!-- CATÁLOGO COMPLETO -->
   <div class="card">
     <div class="card-title">Catálogo completo — Semáforo por eGFR</div>
     <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap">
@@ -1801,6 +2255,71 @@ function renderFarmTab() {
         <div class="field"><label>Fecha inicio</label><input type="date" id="fm-finicio" style="background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 10px;width:100%"></div>
       </div>
       <div class="field"><label>Notas</label><textarea id="fm-notas" rows="2" style="background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:8px 10px;width:100%;resize:vertical"></textarea></div>
+
+      <!-- EFECTOS ADVERSOS en modal -->
+      <div style="margin-top:12px;padding:12px;background:#fff7ed;border:1px solid #fed7aa;border-radius:8px">
+        <div style="font-size:12px;font-weight:700;color:#c2410c;margin-bottom:8px">⚠ Efectos adversos reportados (opcional)</div>
+        <div class="g2">
+          <div class="field"><label style="font-size:11px">Efecto adverso</label>
+            <input id="fm-ea-descripcion" placeholder="Ej: Náuseas, pancreatitis leve, bradicardia" style="background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 10px;width:100%;font-size:12px">
+          </div>
+          <div class="field"><label style="font-size:11px">Gravedad</label>
+            <select id="fm-ea-gravedad" style="background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 10px;width:100%;font-size:12px">
+              <option value="">—</option>
+              <option value="leve">Leve — manejable</option>
+              <option value="moderado">Moderado — requiere ajuste</option>
+              <option value="grave">Grave — suspender</option>
+            </select>
+          </div>
+          <div class="field"><label style="font-size:11px">Fecha de aparición</label>
+            <input type="date" id="fm-ea-fecha" style="background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 10px;width:100%;font-size:12px">
+          </div>
+          <div class="field"><label style="font-size:11px">Acción tomada</label>
+            <select id="fm-ea-accion" style="background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 10px;width:100%;font-size:12px">
+              <option value="">—</option>
+              <option value="observacion">Observación</option>
+              <option value="reduccion_dosis">Reducción de dosis</option>
+              <option value="suspension_temporal">Suspensión temporal</option>
+              <option value="suspension_definitiva">Suspensión definitiva</option>
+              <option value="cambio_molecula">Cambio de molécula</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- ABANDONO / CAMBIO en modal -->
+      <div style="margin-top:10px;padding:12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px">
+        <div style="font-size:12px;font-weight:700;color:#166534;margin-bottom:8px">🔄 Abandono o cambio de tratamiento (opcional)</div>
+        <div class="g2">
+          <div class="field"><label style="font-size:11px">Motivo de abandono/cambio</label>
+            <select id="fm-cambio-motivo" style="background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 10px;width:100%;font-size:12px">
+              <option value="">—</option>
+              <option value="efecto_adverso">Efecto adverso</option>
+              <option value="costo">Costo / acceso</option>
+              <option value="falta_respuesta">Falta de respuesta clínica</option>
+              <option value="decision_paciente">Decisión del paciente</option>
+              <option value="embarazo">Embarazo / lactancia</option>
+              <option value="interaccion">Interacción farmacológica</option>
+              <option value="mejoria">Mejoría — suspensión programada</option>
+              <option value="cambio_marca">Cambio de marca (genérico)</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+          <div class="field"><label style="font-size:11px">Molécula / marca anterior</label>
+            <input id="fm-cambio-anterior" placeholder="Ej: Ozempic 0.5 mg / Victoza" style="background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 10px;width:100%;font-size:12px">
+          </div>
+          <div class="field"><label style="font-size:11px">Nueva molécula / marca</label>
+            <input id="fm-cambio-nueva" placeholder="Ej: Mounjaro 5 mg / Trulicity" style="background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 10px;width:100%;font-size:12px">
+          </div>
+          <div class="field"><label style="font-size:11px">Fecha de cambio</label>
+            <input type="date" id="fm-cambio-fecha" style="background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 10px;width:100%;font-size:12px">
+          </div>
+          <div class="field" style="grid-column:span 2"><label style="font-size:11px">Observaciones del cambio</label>
+            <input id="fm-cambio-obs" placeholder="Ej: Cambio a tirzepatida por falta de respuesta a semaglutida tras 6 meses" style="background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 10px;width:100%;font-size:12px">
+          </div>
+        </div>
+      </div>
+
       <div id="fm-override-section" style="display:none;background:rgba(240,167,66,.1);border:1px solid #f0a742;border-radius:8px;padding:12px;margin-top:8px">
         <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer">
           <input type="checkbox" id="fm-override"> <span>Override médico — prescribir pese a contraindicación</span>
@@ -1814,6 +2333,107 @@ function renderFarmTab() {
         <button class="btn btn-ghost" onclick="closeFarmModal()">Cancelar</button>
         <button class="btn btn-success" onclick="saveFarmaco()">Guardar</button>
       </div>
+    </div>
+  </div>
+
+  <!-- ACÁPITE: EFECTOS ADVERSOS REGISTRADOS EN ESTA VISITA -->
+  <div class="card" style="margin-top:16px;border-top:3px solid #f97316">
+    <div class="card-title" style="display:flex;justify-content:space-between;align-items:center">
+      <span>⚠ Efectos adversos — Historial de esta visita</span>
+      <button class="btn btn-ghost btn-sm" onclick="saveFarmEA()">Guardar</button>
+    </div>
+    <div class="g2" style="margin-bottom:10px">
+      <div class="field"><label>Fármaco implicado</label>
+        <select id="ea-farm-id" style="background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 10px;width:100%">
+          <option value="">— Seleccionar fármaco —</option>
+          ${FarmState.visita_farmacos.map(f => `<option value="${f.id}">${f.catalogo_nombre||f.farmaco_libre||'?'} ${f.dosis||''}</option>`).join('')}
+        </select>
+      </div>
+      <div class="field"><label>Efecto adverso</label>
+        <input id="ea-descripcion" placeholder="Ej: Náuseas, vómitos, dolor epigástrico">
+      </div>
+      <div class="field"><label>Gravedad</label>
+        <select id="ea-gravedad">
+          <option value="leve">Leve</option>
+          <option value="moderado">Moderado</option>
+          <option value="grave">Grave</option>
+        </select>
+      </div>
+      <div class="field"><label>Acción tomada</label>
+        <select id="ea-accion">
+          <option value="observacion">Observación</option>
+          <option value="reduccion_dosis">Reducción de dosis</option>
+          <option value="suspension_temporal">Suspensión temporal</option>
+          <option value="suspension_definitiva">Suspensión definitiva</option>
+          <option value="cambio_molecula">Cambio de molécula</option>
+        </select>
+      </div>
+      <div class="field"><label>Fecha de aparición</label>
+        <input type="date" id="ea-fecha">
+      </div>
+      <div class="field"><label>Observaciones</label>
+        <input id="ea-obs" placeholder="Detalle clínico adicional">
+      </div>
+    </div>
+    <div id="ea-lista" style="font-size:12px;color:var(--muted);padding-top:8px;border-top:1px solid var(--border)">
+      ${(FarmState.efectos_adversos||[]).length
+        ? (FarmState.efectos_adversos||[]).map(ea=>`
+          <div style="padding:7px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px">
+            <span style="font-size:18px">${ea.gravedad==='grave'?'🔴':ea.gravedad==='moderado'?'🟡':'🟢'}</span>
+            <div style="flex:1"><strong>${ea.farmaco_nombre||'—'}</strong> · ${ea.descripcion||''}
+              <span style="color:var(--muted);font-size:11px"> · ${ea.accion_tomada||''} · ${ea.fecha||''}</span>
+            </div>
+          </div>`).join('')
+        : '<span>Sin efectos adversos registrados en esta visita.</span>'}
+    </div>
+  </div>
+
+  <!-- ACÁPITE: ABANDONO / CAMBIO DE MOLÉCULA O MARCA -->
+  <div class="card" style="margin-top:16px;border-top:3px solid #16a34a">
+    <div class="card-title" style="display:flex;justify-content:space-between;align-items:center">
+      <span>🔄 Abandono o cambio de molécula / marca</span>
+      <button class="btn btn-ghost btn-sm" onclick="saveFarmCambio()">Guardar</button>
+    </div>
+    <div class="g2" style="margin-bottom:10px">
+      <div class="field"><label>Motivo de abandono / cambio</label>
+        <select id="cambio-motivo">
+          <option value="">—</option>
+          <option value="efecto_adverso">Efecto adverso</option>
+          <option value="costo">Costo / acceso</option>
+          <option value="falta_respuesta">Falta de respuesta clínica</option>
+          <option value="decision_paciente">Decisión del paciente</option>
+          <option value="embarazo">Embarazo / lactancia</option>
+          <option value="interaccion">Interacción farmacológica</option>
+          <option value="mejoria">Mejoría — suspensión programada</option>
+          <option value="cambio_marca">Cambio de marca (genérico)</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+      <div class="field"><label>Fármaco / marca anterior</label>
+        <input id="cambio-anterior" placeholder="Ej: Ozempic 0.5 mg semanal">
+      </div>
+      <div class="field"><label>Nueva molécula / marca</label>
+        <input id="cambio-nueva" placeholder="Ej: Mounjaro 5 mg semanal">
+      </div>
+      <div class="field"><label>Fecha de cambio</label>
+        <input type="date" id="cambio-fecha">
+      </div>
+      <div class="field" style="grid-column:span 2"><label>Observaciones clínicas</label>
+        <input id="cambio-obs" placeholder="Ej: Cambio por falta de respuesta tras 6 meses con semaglutida, meta HbA1c no alcanzada">
+      </div>
+    </div>
+    <div id="cambio-lista" style="font-size:12px;color:var(--muted);padding-top:8px;border-top:1px solid var(--border)">
+      ${(FarmState.cambios||[]).length
+        ? (FarmState.cambios||[]).map(c=>`
+          <div style="padding:7px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px">
+            <span style="font-size:18px">🔄</span>
+            <div style="flex:1">
+              <strong>${c.farmaco_anterior||'—'}</strong> → <strong>${c.farmaco_nuevo||'—'}</strong>
+              <span style="background:var(--bg2);border-radius:20px;padding:2px 8px;font-size:11px;margin-left:6px">${c.motivo?.replace(/_/g,' ')||''}</span>
+              <div style="color:var(--muted);font-size:11px;margin-top:2px">${c.observaciones||''} · ${c.fecha||''}</div>
+            </div>
+          </div>`).join('')
+        : '<span>Sin cambios registrados en esta visita.</span>'}
     </div>
   </div>
   `;
@@ -1961,15 +2581,27 @@ async function saveFarmaco() {
     return;
   }
 
+  const g = id => document.getElementById(id)?.value || null;
   const body = {
-    farmaco_id:     farmId,
-    dosis:          document.getElementById('fm-dosis')?.value,
-    frecuencia:     document.getElementById('fm-freq')?.value,
-    estado:         document.getElementById('fm-estado')?.value || 'activo',
-    fecha_inicio:   document.getElementById('fm-finicio')?.value,
-    notas:          document.getElementById('fm-notas')?.value,
+    farmaco_id:      farmId,
+    dosis:           g('fm-dosis'),
+    frecuencia:      g('fm-freq'),
+    estado:          g('fm-estado') || 'activo',
+    fecha_inicio:    g('fm-finicio'),
+    notas:           g('fm-notas'),
     override_medico: override ? 1 : 0,
-    override_motivo: document.getElementById('fm-override-motivo')?.value,
+    override_motivo: g('fm-override-motivo'),
+    // Efectos adversos desde modal
+    ea_descripcion:  g('fm-ea-descripcion'),
+    ea_gravedad:     g('fm-ea-gravedad'),
+    ea_accion:       g('fm-ea-accion'),
+    ea_fecha:        g('fm-ea-fecha'),
+    // Cambio de molécula/marca desde modal
+    cambio_motivo:   g('fm-cambio-motivo'),
+    cambio_anterior: g('fm-cambio-anterior'),
+    cambio_nueva:    g('fm-cambio-nueva'),
+    cambio_fecha:    g('fm-cambio-fecha'),
+    cambio_obs:      g('fm-cambio-obs'),
   };
 
   try {
@@ -1982,6 +2614,93 @@ async function saveFarmaco() {
     // Chequeo automático de interacciones
     await checkInteraccionesVisita();
   } catch(e) { /* toast shown by api() */ }
+}
+
+// ── EFECTOS ADVERSOS — guardado desde acápite independiente ──
+async function saveFarmEA() {
+  const vid = FarmState.vid;
+  if (!vid) return;
+  const g = id => document.getElementById(id)?.value || null;
+  const farmId = parseInt(g('ea-farm-id')) || null;
+  if (!farmId) { toast('Selecciona el fármaco implicado', 'err'); return; }
+
+  const body = {
+    id: farmId,
+    ea_descripcion: g('ea-descripcion'),
+    ea_gravedad:    g('ea-gravedad'),
+    ea_accion:      g('ea-accion'),
+    ea_fecha:       g('ea-fecha'),
+    notas:          g('ea-obs'),
+  };
+
+  await api(`/visitas/${vid}/farmacos`, 'POST', body);
+
+  // Actualizar lista visual
+  const f = FarmState.visita_farmacos.find(x => x.id === farmId);
+  if (f) {
+    f.ea_descripcion = body.ea_descripcion;
+    f.ea_gravedad    = body.ea_gravedad;
+    f.ea_accion      = body.ea_accion;
+    f.ea_fecha       = body.ea_fecha;
+  }
+  FarmState.efectos_adversos = FarmState.visita_farmacos
+    .filter(f => f.ea_descripcion)
+    .map(f => ({ farmaco_nombre: f.catalogo_nombre||f.farmaco_libre||'?', descripcion: f.ea_descripcion, gravedad: f.ea_gravedad, accion_tomada: f.ea_accion, fecha: f.ea_fecha }));
+
+  document.getElementById('ea-lista').innerHTML = FarmState.efectos_adversos.length
+    ? FarmState.efectos_adversos.map(ea=>`
+        <div style="padding:7px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px">
+          <span style="font-size:18px">${ea.gravedad==='grave'?'🔴':ea.gravedad==='moderado'?'🟡':'🟢'}</span>
+          <div style="flex:1"><strong>${ea.farmaco_nombre}</strong> · ${ea.descripcion||''}
+            <span style="color:var(--muted);font-size:11px"> · ${ea.accion_tomada||''} · ${ea.fecha||''}</span>
+          </div>
+        </div>`).join('')
+    : '<span style="color:var(--muted);font-size:12px">Sin efectos adversos registrados.</span>';
+
+  toast('Efecto adverso guardado ✓');
+}
+
+// ── CAMBIO DE MOLÉCULA / MARCA — guardado desde acápite ──────
+async function saveFarmCambio() {
+  const vid = FarmState.vid;
+  if (!vid) return;
+  const g = id => document.getElementById(id)?.value || null;
+
+  const motivo = g('cambio-motivo');
+  if (!motivo) { toast('Selecciona el motivo de cambio', 'err'); return; }
+
+  // Guardamos el cambio en el primer fármaco activo de la visita como referencia
+  // Si hay un fármaco específico implicado, se puede seleccionar en la lista
+  const primerFarm = FarmState.visita_farmacos[0];
+  const body = {
+    id: primerFarm?.id || null,
+    cambio_motivo:   motivo,
+    cambio_anterior: g('cambio-anterior'),
+    cambio_nueva:    g('cambio-nueva'),
+    cambio_fecha:    g('cambio-fecha'),
+    cambio_obs:      g('cambio-obs'),
+  };
+
+  if (body.id) await api(`/visitas/${vid}/farmacos`, 'POST', body);
+
+  const nuevo = { motivo, farmaco_anterior: body.cambio_anterior, farmaco_nuevo: body.cambio_nueva, fecha: body.cambio_fecha, observaciones: body.cambio_obs };
+  FarmState.cambios = [...(FarmState.cambios||[]), nuevo];
+
+  document.getElementById('cambio-lista').innerHTML = FarmState.cambios.map(c=>`
+    <div style="padding:7px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px">
+      <span style="font-size:18px">🔄</span>
+      <div style="flex:1">
+        <strong>${c.farmaco_anterior||'—'}</strong> → <strong>${c.farmaco_nuevo||'—'}</strong>
+        <span style="background:var(--bg2);border-radius:20px;padding:2px 8px;font-size:11px;margin-left:6px">${(c.motivo||'').replace(/_/g,' ')}</span>
+        <div style="color:var(--muted);font-size:11px;margin-top:2px">${c.observaciones||''} · ${c.fecha||''}</div>
+      </div>
+    </div>`).join('');
+
+  // Limpiar form
+  ['cambio-motivo','cambio-anterior','cambio-nueva','cambio-fecha','cambio-obs'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.value = '';
+  });
+  toast('Cambio de tratamiento registrado ✓');
 }
 
 // ── MOTOR DE INTERACCIONES ────────────────────────────────────
@@ -2729,6 +3448,704 @@ async function saveDM() {
   await api(`/visitas/${vid}/diabetes`, 'POST', body);
   toast('Módulo diabetes guardado ✓');
   if (State.currentVisita) State.currentVisita.diabetes = body;
+}
+
+// ════════════════════════════════════════════════════════════
+// MÓDULO RENAL
+// ════════════════════════════════════════════════════════════
+
+function renderTabRenal(rn, v) {
+  const an  = v.analiticas || {};
+  const cc  = v.composicion_corporal || {};
+  const req = v.requerimientos || {};
+
+  // Auto desde analíticas
+  const egfr    = an.egfr || null;
+  const estadioAuto = an.egfr_estadio || (egfr ? egfrLabel(egfr) : '');
+  const caAuto  = an.calcio    || rn.calcio    || '';
+  const pAuto   = an.fosforo   || rn.fosforo   || '';
+  const pthAuto = an.pth       || rn.pth_intacta || '';
+  const vdAuto  = an.vitamina_d || rn.vitamina_d_25 || '';
+  const hbAuto  = an.hemoglobina || rn.hemoglobina || '';
+  const ferrAuto= an.ferritina || rn.ferritina || '';
+  const albAuto = an.albumina  || rn.albumina_renal || '';
+  const hco3Auto= an.bicarbonato || rn.bicarbonato || '';
+
+  const estadioCur = rn.estadio_erc || estadioAuto || '';
+  const modalidadCur = rn.modalidad || (
+    estadioCur==='HD' ? 'hd' : estadioCur==='DP' ? 'dp' :
+    egfr && egfr < 15 ? 'conservador' : 'conservador'
+  );
+
+  function egfrLabel(e) {
+    if (e >= 90) return 'G1'; if (e >= 60) return 'G2';
+    if (e >= 45) return 'G3a'; if (e >= 30) return 'G3b';
+    if (e >= 15) return 'G4'; return 'G5';
+  }
+
+  // Semáforo Ca/P/PTH
+  function semMin(val, min, max) {
+    if (!val) return '';
+    const v = parseFloat(val);
+    if (v < min) return '🔴';
+    if (v > max) return '🔴';
+    return '🟢';
+  }
+
+  // Producto Ca×P (meta <55 mg²/dL² en ERC)
+  const prodCaP = (caAuto && pAuto)
+    ? (parseFloat(caAuto) * parseFloat(pAuto)).toFixed(1) : (rn.producto_ca_p || '');
+
+  const isDialisis = ['hd','dp'].includes(modalidadCur);
+  const isHD = modalidadCur === 'hd';
+  const isDP = modalidadCur === 'dp';
+
+  // Restricciones por estadio (desde requerimientos si ya calculado)
+  const restNa = rn.restriccion_na_mg || req.sodio_mg || '';
+  const restK  = rn.restriccion_k_mg  || req.potasio_mg || '';
+  const restP  = rn.restriccion_p_mg  || req.fosforo_mg || '';
+  const restH2O= rn.restriccion_agua_ml || '';
+  const protG  = rn.proteina_g_dia    || req.proteina_g_dia || '';
+
+  // Kt/V estimado desde BUN (fórmula Daugirdas segunda generación)
+  function calcKtV(preBUN, postBUN, pesoSeco, ganancia, durH) {
+    if (!preBUN || !postBUN || !pesoSeco) return null;
+    const r  = postBUN / preBUN;
+    const t  = (durH || 4) * 60; // minutos
+    const uf = (ganancia || 0) / pesoSeco;
+    const ktv = -Math.log(r - 0.008 * t) + (4 - 3.5 * r) * uf;
+    return ktv.toFixed(2);
+  }
+  const ktvAuto = rn.pre_bun && rn.post_bun
+    ? calcKtV(rn.pre_bun, rn.post_bun, rn.peso_seco, rn.ganancia_interdial_kg, rn.duracion_sesion_h)
+    : rn.ktv_calculado || '';
+
+  function ktvChip(val, meta) {
+    if (!val) return '';
+    const ok = parseFloat(val) >= parseFloat(meta || 1.2);
+    return `<span style="background:${ok?'#22c55e22':'#ef444422'};color:${ok?'#15803d':'#ef4444'};border:1px solid ${ok?'#22c55e55':'#ef444455'};border-radius:20px;padding:2px 10px;font-size:11px;font-weight:700">${ok?'✔ Adecuado':'✘ Inadecuado'} (Kt/V ${val})</span>`;
+  }
+
+  return `
+<!-- ─── 1. ESTADIO Y MODALIDAD ───────────────────────────── -->
+<div class="card">
+  <div class="card-title">Enfermedad renal crónica — Estadio y modalidad
+    ${egfr ? `<span style="float:right;font-size:11px;font-weight:400;color:var(--muted)">eGFR actual: <strong>${egfr.toFixed(0)} mL/min/1.73m²</strong></span>` : ''}
+  </div>
+  <div class="g3">
+    <div class="field"><label>Estadio ERC</label>
+      <select id="rn-estadio" onchange="rnModalidadChange()">
+        ${['G1','G2','G3a','G3b','G4','G5','HD','DP'].map(e =>
+          `<option value="${e}" ${estadioCur===e?'selected':''}>${e}${
+            {G1:' — eGFR ≥90',G2:' — eGFR 60-89',G3a:' — eGFR 45-59',
+             G3b:' — eGFR 30-44',G4:' — eGFR 15-29',G5:' — eGFR <15',
+             HD:' — Hemodiálisis',DP:' — Diálisis Peritoneal'}[e]||''
+          }</option>`).join('')}
+      </select>
+    </div>
+    <div class="field"><label>Modalidad de tratamiento</label>
+      <select id="rn-modalidad" onchange="rnModalidadChange()">
+        <option value="conservador" ${modalidadCur==='conservador'?'selected':''}>Tratamiento conservador</option>
+        <option value="hd"          ${modalidadCur==='hd'?'selected':''}>Hemodiálisis (HD)</option>
+        <option value="dp"          ${modalidadCur==='dp'?'selected':''}>Diálisis peritoneal (DP)</option>
+        <option value="trasplante"  ${modalidadCur==='trasplante'?'selected':''}>Post-trasplante renal</option>
+      </select>
+    </div>
+    <div class="field"><label>Acceso vascular / peritoneal</label>
+      <select id="rn-acceso">
+        <option value="">—</option>
+        <option value="fav"      ${rn.acceso_vascular==='fav'?'selected':''}>FAV (fístula arteriovenosa)</option>
+        <option value="ptfe"     ${rn.acceso_vascular==='ptfe'?'selected':''}>Injerto PTFE</option>
+        <option value="cvc_temp" ${rn.acceso_vascular==='cvc_temp'?'selected':''}>CVC temporal</option>
+        <option value="cvc_perm" ${rn.acceso_vascular==='cvc_perm'?'selected':''}>CVC permanente (Tesio/Permcath)</option>
+        <option value="cat_perit"${rn.acceso_vascular==='cat_perit'?'selected':''}>Catéter peritoneal (Tenckhoff)</option>
+      </select>
+    </div>
+  </div>
+  <div class="g3" style="margin-top:8px">
+    <div class="field"><label>Fecha inicio diálisis</label>
+      <input type="date" id="rn-fecha-dial" value="${rn.fecha_inicio_dialisis||''}"></div>
+    <div class="field"><label>Tiempo en diálisis</label>
+      <div class="field-wrap">
+        <input type="number" id="rn-tiempo-dial" value="${rn.tiempo_en_dialisis_meses||''}" placeholder="meses">
+        <span class="field-unit">meses</span>
+      </div>
+    </div>
+    <div class="field"><label>Diuresis residual (FRR)</label>
+      <div class="field-wrap">
+        <input type="number" id="rn-diuresis" value="${rn.diuresis_residual_ml||''}" placeholder="mL/24h" oninput="rnAutoCalc()">
+        <span class="field-unit">mL/24h</span>
+      </div>
+      <label style="display:flex;align-items:center;gap:5px;font-size:11px;margin-top:4px;cursor:pointer">
+        <input type="checkbox" id="rn-frr" ${rn.funcion_renal_residual?'checked':''}> Tiene función renal residual
+      </label>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 2. BALANCE HÍDRICO (HD/DP) ───────────────────────── -->
+<div class="card" id="rn-balance-card" style="display:${isDialisis?'block':'none'}">
+  <div class="card-title">Balance hídrico interdialítico</div>
+  <div class="g4">
+    <div class="field"><label>Peso seco (kg)</label>
+      <div class="field-wrap">
+        <input type="number" step="0.1" id="rn-ps" value="${rn.peso_seco||''}" oninput="rnAutoCalc()" placeholder="kg">
+        <span class="field-unit">kg</span>
+      </div>
+    </div>
+    <div class="field"><label>Peso pre-diálisis (kg)</label>
+      <div class="field-wrap">
+        <input type="number" step="0.1" id="rn-ppre" value="${rn.peso_pre_dialisis||''}" oninput="rnAutoCalc()">
+        <span class="field-unit">kg</span>
+      </div>
+    </div>
+    <div class="field"><label>Peso post-diálisis (kg)</label>
+      <div class="field-wrap">
+        <input type="number" step="0.1" id="rn-ppost" value="${rn.peso_post_dialisis||''}" oninput="rnAutoCalc()">
+        <span class="field-unit">kg</span>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:4px">Ganancia interdialítica</div>
+      <div class="computed" id="rn-gan-kg" style="font-size:15px;font-weight:700">—</div>
+      <div id="rn-gan-eval" style="font-size:10px;margin-top:3px"></div>
+    </div>
+  </div>
+  <div class="g3" style="margin-top:8px">
+    <div class="field"><label>Sesiones / semana</label>
+      <select id="rn-sesiones">
+        <option value="3" ${(rn.sesiones_semana||3)==3?'selected':''}>3 por semana (estándar)</option>
+        <option value="2" ${rn.sesiones_semana==2?'selected':''}>2 por semana</option>
+        <option value="4" ${rn.sesiones_semana==4?'selected':''}>4 por semana (intensivo)</option>
+        <option value="5" ${rn.sesiones_semana==5?'selected':''}>5 por semana (diario)</option>
+      </select>
+    </div>
+    <div class="field"><label>Duración sesión (horas)</label>
+      <select id="rn-duracion">
+        <option value="3"   ${rn.duracion_sesion_h==3?'selected':''}>3 horas</option>
+        <option value="3.5" ${rn.duracion_sesion_h==3.5?'selected':''}>3.5 horas</option>
+        <option value="4"   ${(rn.duracion_sesion_h||4)==4?'selected':''}>4 horas (estándar)</option>
+        <option value="4.5" ${rn.duracion_sesion_h==4.5?'selected':''}>4.5 horas</option>
+        <option value="5"   ${rn.duracion_sesion_h==5?'selected':''}>5 horas</option>
+      </select>
+    </div>
+    <div class="field"><label>Restricción hídrica</label>
+      <div class="field-wrap">
+        <input type="number" id="rn-rest-agua" value="${restH2O||''}" placeholder="mL/día">
+        <span class="field-unit">mL/día</span>
+      </div>
+      <div style="font-size:10px;color:var(--muted);margin-top:3px" id="rn-agua-calc"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 3. KT/V — ADECUACIÓN DIÁLISIS ────────────────────── -->
+<div class="card" id="rn-ktv-card" style="display:${isHD?'block':'none'}">
+  <div class="card-title">Adecuación de diálisis — Kt/V
+    <span style="float:right" id="rn-ktv-chip">${ktvAuto ? ktvChip(ktvAuto, rn.ktv_meta||1.2) : ''}</span>
+  </div>
+  <div class="g4">
+    <div class="field"><label>BUN pre-diálisis</label>
+      <div class="field-wrap">
+        <input type="number" step="0.1" id="rn-bun-pre" value="${rn.pre_bun||''}" oninput="rnCalcKtV()">
+        <span class="field-unit">mg/dL</span>
+      </div>
+    </div>
+    <div class="field"><label>BUN post-diálisis</label>
+      <div class="field-wrap">
+        <input type="number" step="0.1" id="rn-bun-post" value="${rn.post_bun||''}" oninput="rnCalcKtV()">
+        <span class="field-unit">mg/dL</span>
+      </div>
+    </div>
+    <div class="field"><label>Kt/V medido (laboratorio)</label>
+      <input type="number" step="0.01" id="rn-ktv-sp" value="${rn.ktv_sp||''}" oninput="rnUpdateKtvChip()">
+    </div>
+    <div>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:4px">Kt/V calculado (Daugirdas)</div>
+      <div class="computed" id="rn-ktv-calc" style="font-size:15px;font-weight:700;color:var(--accent)">${ktvAuto||'—'}</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:2px">Meta HD: ≥1.2 — DP: ≥1.7</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 4. MINERALES Y METABOLISMO ÓSEO ──────────────────── -->
+<div class="card">
+  <div class="card-title">Minerales y metabolismo óseo — MBD-ERC</div>
+  <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;font-size:12px">
+      <thead>
+        <tr style="background:var(--bg2)">
+          <th style="padding:7px 10px;text-align:left;font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase">Parámetro</th>
+          <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase">Valor</th>
+          <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase">Rango meta ERC</th>
+          <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${[
+          ['rn-calcio',   'Calcio total',      caAuto,   '8.4-9.5', 'mg/dL', 8.4, 9.5],
+          ['rn-fosforo',  'Fósforo',           pAuto,    '<5.5 (G3-5) / <5.0 (diálisis)', 'mg/dL', 2.5, 5.5],
+          ['rn-pth',      'PTH intacta',       pthAuto,  'G3:35-70 / G4:70-110 / G5/D:150-600', 'pg/mL', null, null],
+          ['rn-vitd',     'Vitamina D 25-OH',  vdAuto,   '>30 ng/mL', 'ng/mL', 30, 150],
+          ['rn-hco3',     'Bicarbonato',       hco3Auto, '22-26 mEq/L', 'mEq/L', 22, 26],
+          ['rn-alb',      'Albúmina',          albAuto,  '>3.5 g/dL', 'g/dL', 3.5, 5.0],
+        ].map(([id, label, val, meta, unit, min, max]) => `
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:7px 10px;font-weight:500">${label}</td>
+            <td style="padding:7px 10px;text-align:center">
+              <div class="field-wrap" style="justify-content:center">
+                <input type="number" step="0.1" id="${id}" value="${val||''}"
+                  oninput="rnCheckMineral('${id}',${min},${max})"
+                  style="width:90px;text-align:center;font-size:13px;font-weight:600">
+                <span class="field-unit">${unit}</span>
+              </div>
+            </td>
+            <td style="padding:7px 10px;text-align:center;color:var(--muted);font-size:10px">${meta}</td>
+            <td style="padding:7px 10px;text-align:center" id="${id}-st">
+              ${val && min ? rnStatusIcon(parseFloat(val), min, max) : '—'}
+            </td>
+          </tr>`).join('')}
+        <!-- Producto Ca×P -->
+        <tr style="border-bottom:1px solid var(--border);background:var(--bg2)">
+          <td style="padding:7px 10px;font-weight:600">Producto Ca×P</td>
+          <td style="padding:7px 10px;text-align:center;font-weight:700" id="rn-cap-val">${prodCaP || '—'}</td>
+          <td style="padding:7px 10px;text-align:center;color:var(--muted);font-size:10px">&lt;55 mg²/dL²</td>
+          <td style="padding:7px 10px;text-align:center" id="rn-cap-st">
+            ${prodCaP ? (parseFloat(prodCaP) < 55 ? '<span style="color:#22c55e;font-weight:700">✔ OK</span>' : '<span style="color:#ef4444;font-weight:700">✘ Alto</span>') : '—'}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 5. ANEMIA RENAL ───────────────────────────────────── -->
+<div class="card">
+  <div class="card-title">Anemia renal</div>
+  <div class="g4">
+    <div class="field"><label>Hemoglobina</label>
+      <div class="field-wrap">
+        <input type="number" step="0.1" id="rn-hb" value="${hbAuto||''}" oninput="rnCheckHb()">
+        <span class="field-unit">g/dL</span>
+      </div>
+      <div id="rn-hb-ref" style="font-size:10px;margin-top:3px;color:var(--muted)">
+        ${hbAuto ? rnHbRef(hbAuto) : 'Meta ERC: 10-12 g/dL'}
+      </div>
+    </div>
+    <div class="field"><label>Hematocrito</label>
+      <div class="field-wrap">
+        <input type="number" step="0.1" id="rn-hto" value="${rn.hematocrito||''}">
+        <span class="field-unit">%</span>
+      </div>
+    </div>
+    <div class="field"><label>Ferritina</label>
+      <div class="field-wrap">
+        <input type="number" id="rn-ferr" value="${ferrAuto||''}">
+        <span class="field-unit">ng/mL</span>
+      </div>
+      <div style="font-size:10px;color:var(--muted);margin-top:2px">Meta ERC: 200-500 ng/mL</div>
+    </div>
+    <div class="field"><label>Saturación transferrina</label>
+      <div class="field-wrap">
+        <input type="number" step="0.1" id="rn-sat-tf" value="${rn.saturacion_transferrina||''}">
+        <span class="field-unit">%</span>
+      </div>
+      <div style="font-size:10px;color:var(--muted);margin-top:2px">Meta: >20%</div>
+    </div>
+  </div>
+  <div class="g2" style="margin-top:8px">
+    <div class="field"><label>Eritropoyetina / IEER (dosis)</label>
+      <input type="text" id="rn-epo" value="${rn.epo_dosis||''}"
+        placeholder="ej. Darbepoetina 40 mcg semanal SC">
+    </div>
+    <div>
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:12px;margin-top:18px">
+        <input type="checkbox" id="rn-hierro-iv" ${rn.hierro_iv?'checked':''}> Recibe hierro IV (sacarosa/gluconato/carboximaltosa)
+      </label>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 6. DESNUTRICIÓN PROTEICO-ENERGÉTICA (PEF-ERC) ────── -->
+<div class="card" style="border-top:3px solid #f97316">
+  <div class="card-title" style="color:#f97316">Desgaste Proteico-Energético (DPE-ERC)
+    <span style="float:right;font-size:10px;font-weight:400;color:var(--muted)">Criterios ISRNM 2008</span>
+  </div>
+  <div class="g2" style="align-items:start">
+    <div>
+      <div style="font-size:11px;font-weight:600;margin-bottom:8px">Criterios diagnósticos (≥3 de 4 categorías)</div>
+      ${[
+        ['rn-pef-alb',    'Albumina sérica <3.8 g/dL', albAuto && parseFloat(albAuto) < 3.8],
+        ['rn-pef-imc',    'IMC <23 kg/m² o pérdida >5% peso en 3m', cc.imc && parseFloat(cc.imc) < 23],
+        ['rn-pef-ingesta','Ingesta proteica <0.8 g/kg/día o calórica <25 kcal/kg/día', false],
+        ['rn-pef-masa',   'Masa muscular reducida (IAMM bajo o pérdida >5% en 3m)', false],
+      ].map(([id, label, auto]) => `
+        <label style="display:flex;align-items:flex-start;gap:6px;cursor:pointer;font-size:12px;padding:4px 0;border-bottom:1px solid var(--border)">
+          <input type="checkbox" id="${id}" ${auto||rn['pef_'+id.replace('rn-pef-','')]?'checked':''} onchange="rnPefCheck()" style="margin-top:2px">
+          <span>${label}${auto ? ' <span style="font-size:9px;background:#f9731622;color:#f97316;border-radius:4px;padding:1px 5px;font-weight:600">AUTO</span>' : ''}</span>
+        </label>`).join('')}
+      <div id="rn-pef-resultado" style="margin-top:10px;padding:8px 12px;border-radius:8px;font-size:12px;font-weight:600;background:var(--bg)">
+        Complete los criterios arriba
+      </div>
+    </div>
+    <div>
+      <div class="field"><label>Nivel de DPE</label>
+        <select id="rn-pef-nivel">
+          <option value="">—</option>
+          <option value="leve"    ${rn.pef_nivel==='leve'?'selected':''}>Leve</option>
+          <option value="moderado" ${rn.pef_nivel==='moderado'?'selected':''}>Moderado</option>
+          <option value="severo"  ${rn.pef_nivel==='severo'?'selected':''}>Severo</option>
+        </select>
+      </div>
+      <div class="field" style="margin-top:8px">
+        <label>Prealbúmina (mg/dL)</label>
+        <div class="field-wrap">
+          <input type="number" step="0.1" id="rn-prealb" value="${rn.prealbumin||''}">
+          <span class="field-unit">mg/dL</span>
+        </div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px">Normal: 18-40 mg/dL · <15 = DPE significativo</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 7. RESTRICCIONES DIETÉTICAS ──────────────────────── -->
+<div class="card">
+  <div class="card-title">Restricciones dietéticas por estadio</div>
+  <div class="g4">
+    <div class="field"><label>Sodio</label>
+      <div class="field-wrap">
+        <input type="number" id="rn-rest-na" value="${restNa||''}" placeholder="mg/día">
+        <span class="field-unit">mg/día</span>
+      </div>
+    </div>
+    <div class="field"><label>Potasio</label>
+      <div class="field-wrap">
+        <input type="number" id="rn-rest-k" value="${restK||''}" placeholder="mg/día">
+        <span class="field-unit">mg/día</span>
+      </div>
+    </div>
+    <div class="field"><label>Fósforo</label>
+      <div class="field-wrap">
+        <input type="number" id="rn-rest-p" value="${restP||''}" placeholder="mg/día">
+        <span class="field-unit">mg/día</span>
+      </div>
+    </div>
+    <div class="field"><label>Proteína</label>
+      <div class="field-wrap">
+        <input type="number" step="0.1" id="rn-prot-dia" value="${protG||''}" placeholder="g/día">
+        <span class="field-unit">g/día</span>
+      </div>
+    </div>
+  </div>
+  <!-- Referencia rápida por estadio -->
+  <div id="rn-rest-ref" style="margin-top:10px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px;font-size:11px;display:none"></div>
+</div>
+
+<!-- ─── 8. DIÁLISIS PERITONEAL (DP) ──────────────────────── -->
+<div class="card" id="rn-dp-card" style="display:${isDP?'block':'none'}">
+  <div class="card-title">Diálisis peritoneal — Detalle DP</div>
+  <div class="g3">
+    <div class="field"><label>Modalidad DP</label>
+      <select id="rn-dp-mod">
+        <option value="CAPD"  ${rn.dp_modalidad==='CAPD'?'selected':''}>CAPD (manual)</option>
+        <option value="APD"   ${rn.dp_modalidad==='APD'?'selected':''}>APD (cicladora nocturna)</option>
+        <option value="CCPD"  ${rn.dp_modalidad==='CCPD'?'selected':''}>CCPD (continua cicladora)</option>
+      </select>
+    </div>
+    <div class="field"><label>Intercambios / día</label>
+      <input type="number" id="rn-dp-intx" value="${rn.dp_intercambios||''}" placeholder="ej. 4">
+    </div>
+    <div class="field"><label>Volumen por intercambio</label>
+      <div class="field-wrap">
+        <input type="number" id="rn-dp-vol" value="${rn.dp_volumen_ml||''}" placeholder="2000" oninput="rnDpKcal()">
+        <span class="field-unit">mL</span>
+      </div>
+    </div>
+  </div>
+  <div class="g3" style="margin-top:8px">
+    <div class="field"><label>Concentración glucosa dializado</label>
+      <select id="rn-dp-gluc" onchange="rnDpKcal()">
+        <option value="1.5" ${rn.dp_glucosa_concentracion==='1.5%'?'selected':''}>1.5% (isoosmolar)</option>
+        <option value="2.5" ${rn.dp_glucosa_concentracion==='2.5%'?'selected':''}>2.5% (hiperosmolar)</option>
+        <option value="4.25" ${rn.dp_glucosa_concentracion==='4.25%'?'selected':''}>4.25% (muy hiperosmolar)</option>
+        <option value="icodextrina" ${rn.dp_glucosa_concentracion==='icodextrina'?'selected':''}>Icodextrina 7.5%</option>
+      </select>
+    </div>
+    <div>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:4px">kcal absorbidas del dializado</div>
+      <div class="computed" id="rn-dp-kcal" style="font-size:15px;font-weight:700;color:var(--accent)">
+        ${rn.dp_kcal_glucosa ? rn.dp_kcal_glucosa + ' kcal/día' : '—'}
+      </div>
+      <div style="font-size:10px;color:var(--muted);margin-top:2px">~60-70% de la glucosa del dializado</div>
+    </div>
+    <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px">
+      <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Importante DP</div>
+      <div style="font-size:11px;color:var(--text)">Descontar kcal del dializado del plan nutricional total. Meta proteína 1.3-1.5 g/kg/día.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 9. NOTAS ──────────────────────────────────────────── -->
+<div class="card">
+  <div class="card-title">Notas clínicas renales</div>
+  <div class="field">
+    <textarea id="rn-notas" rows="3" placeholder="Plan de manejo, ajuste de quelantes, cambios en pauta dialítica…">${rn.notas||''}</textarea>
+  </div>
+</div>
+
+<div style="display:flex;justify-content:flex-end;margin-top:4px">
+  <button class="btn btn-success" onclick="saveRenal()">Guardar módulo renal</button>
+</div>`;
+}
+
+// ── HELPERS MÓDULO RENAL ─────────────────────────────────────
+
+function rnStatusIcon(val, min, max) {
+  if (!val || min === null) return '—';
+  if (val < min || val > max)
+    return `<span style="color:#ef4444;font-weight:700">✘ ${val < min ? 'Bajo' : 'Alto'}</span>`;
+  return `<span style="color:#22c55e;font-weight:700">✔ OK</span>`;
+}
+
+function rnHbRef(hb) {
+  const h = parseFloat(hb);
+  if (h < 10) return '🔴 Anemia significativa (<10 g/dL) — evaluar IEER';
+  if (h < 11) return '🟡 Límite bajo — monitorear';
+  if (h <= 12) return '🟢 En meta ERC (10-12 g/dL)';
+  return '🟡 Sobre meta — precaución trombosis';
+}
+
+function rnCheckMineral(id, min, max) {
+  const val = parseFloat(document.getElementById(id)?.value);
+  const stEl = document.getElementById(id + '-st');
+  if (!stEl) return;
+  if (!val || min === null) { stEl.innerHTML = '—'; return; }
+  stEl.innerHTML = rnStatusIcon(val, min, max);
+
+  // Actualizar producto Ca×P
+  const ca = parseFloat(document.getElementById('rn-calcio')?.value) || 0;
+  const p  = parseFloat(document.getElementById('rn-fosforo')?.value) || 0;
+  if (ca && p) {
+    const prod = (ca * p).toFixed(1);
+    const capEl = document.getElementById('rn-cap-val');
+    const capSt = document.getElementById('rn-cap-st');
+    if (capEl) capEl.textContent = prod;
+    if (capSt) capSt.innerHTML = parseFloat(prod) < 55
+      ? '<span style="color:#22c55e;font-weight:700">✔ OK</span>'
+      : '<span style="color:#ef4444;font-weight:700">✘ Alto (>55)</span>';
+  }
+}
+
+function rnCheckHb() {
+  const val = document.getElementById('rn-hb')?.value;
+  const el  = document.getElementById('rn-hb-ref');
+  if (el && val) el.textContent = rnHbRef(val);
+}
+
+function rnAutoCalc() {
+  const ps   = parseFloat(document.getElementById('rn-ps')?.value)   || 0;
+  const ppre = parseFloat(document.getElementById('rn-ppre')?.value) || 0;
+  const diur = parseFloat(document.getElementById('rn-diuresis')?.value) || 0;
+
+  // Ganancia interdialítica
+  if (ps && ppre) {
+    const gan    = (ppre - ps).toFixed(2);
+    const ganPct = ps ? ((ppre - ps) / ps * 100).toFixed(1) : 0;
+    const ganEl  = document.getElementById('rn-gan-kg');
+    const evEl   = document.getElementById('rn-gan-eval');
+    if (ganEl) {
+      ganEl.textContent = gan + ' kg (' + ganPct + '%)';
+      ganEl.style.color = parseFloat(gan) > ps * 0.05 ? '#ef4444' : parseFloat(gan) > ps * 0.03 ? '#f59e0b' : '#22c55e';
+    }
+    if (evEl) {
+      evEl.innerHTML = parseFloat(gan) > ps * 0.05
+        ? '<span style="color:#ef4444">⚠ Excede 5% del peso seco — restricción hídrica insuficiente</span>'
+        : parseFloat(gan) > ps * 0.03
+        ? '<span style="color:#f59e0b">⚠ Límite (3-5%) — reforzar restricción</span>'
+        : '<span style="color:#22c55e">✔ Dentro de límite (&lt;3%)</span>';
+    }
+    // Auto-calcular restricción hídrica recomendada: diuresis + 500-750 mL
+    const restH2O = diur + (diur > 0 ? 750 : 700);
+    const acEl = document.getElementById('rn-agua-calc');
+    if (acEl) acEl.textContent = `Sugerida: ${restH2O} mL/día (diuresis + 750 mL insensibles)`;
+    const rAEl = document.getElementById('rn-rest-agua');
+    if (rAEl && !rAEl.value) rAEl.value = restH2O;
+  }
+
+  // Recalcular Kt/V si hay BUN
+  rnCalcKtV();
+}
+
+function rnCalcKtV() {
+  const preBun  = parseFloat(document.getElementById('rn-bun-pre')?.value)  || 0;
+  const postBun = parseFloat(document.getElementById('rn-bun-post')?.value) || 0;
+  const ps      = parseFloat(document.getElementById('rn-ps')?.value)       || 0;
+  const ppre    = parseFloat(document.getElementById('rn-ppre')?.value)     || 0;
+  const dur     = parseFloat(document.getElementById('rn-duracion')?.value) || 4;
+
+  if (!preBun || !postBun || !ps) return;
+
+  const r   = postBun / preBun;
+  const t   = dur * 60;
+  const uf  = ppre > ps ? (ppre - ps) / ps : 0;
+  const ktv = (-Math.log(r - 0.008 * t) + (4 - 3.5 * r) * uf).toFixed(2);
+
+  const el = document.getElementById('rn-ktv-calc');
+  if (el) el.textContent = ktv;
+  rnUpdateKtvChip(ktv);
+}
+
+function rnUpdateKtvChip(ktv) {
+  const val  = ktv || parseFloat(document.getElementById('rn-ktv-sp')?.value || document.getElementById('rn-ktv-calc')?.textContent) || 0;
+  const meta = 1.2;
+  const chip = document.getElementById('rn-ktv-chip');
+  if (!chip || !val) return;
+  const ok = parseFloat(val) >= meta;
+  chip.innerHTML = `<span style="background:${ok?'#22c55e22':'#ef444422'};color:${ok?'#15803d':'#ef4444'};border:1px solid ${ok?'#22c55e55':'#ef444455'};border-radius:20px;padding:2px 10px;font-size:11px;font-weight:700">${ok?'✔ Adecuado':'✘ Inadecuado'} (Kt/V ${val})</span>`;
+}
+
+function rnModalidadChange() {
+  const mod = document.getElementById('rn-modalidad')?.value;
+  const isD = ['hd','dp'].includes(mod);
+  const isH = mod === 'hd';
+  const isP = mod === 'dp';
+  const bc  = document.getElementById('rn-balance-card');
+  const kc  = document.getElementById('rn-ktv-card');
+  const dc  = document.getElementById('rn-dp-card');
+  if (bc) bc.style.display = isD ? 'block' : 'none';
+  if (kc) kc.style.display = isH ? 'block' : 'none';
+  if (dc) dc.style.display = isP ? 'block' : 'none';
+
+  // Prellenar restricciones según estadio
+  const estadio = document.getElementById('rn-estadio')?.value || '';
+  const ref = {
+    G1:  {na:2300, k:null,  p:null},
+    G2:  {na:2300, k:null,  p:null},
+    G3a: {na:2000, k:null,  p:1000},
+    G3b: {na:2000, k:3000,  p:800},
+    G4:  {na:1500, k:2000,  p:600},
+    G5:  {na:1500, k:1500,  p:600},
+    HD:  {na:2000, k:2000,  p:800},
+    DP:  {na:2000, k:3000,  p:1000},
+  }[estadio];
+
+  const refEl = document.getElementById('rn-rest-ref');
+  if (ref && refEl) {
+    refEl.style.display = 'block';
+    refEl.innerHTML = `<strong>Restricciones sugeridas ${estadio}:</strong>
+      Na: ${ref.na} mg/día &nbsp;·&nbsp;
+      K: ${ref.k || 'Sin restricción'} mg/día &nbsp;·&nbsp;
+      P: ${ref.p || 'Sin restricción'} mg/día`;
+    const naEl = document.getElementById('rn-rest-na');
+    const kEl  = document.getElementById('rn-rest-k');
+    const pEl  = document.getElementById('rn-rest-p');
+    if (naEl && !naEl.value && ref.na) naEl.value = ref.na;
+    if (kEl  && !kEl.value  && ref.k)  kEl.value  = ref.k;
+    if (pEl  && !pEl.value  && ref.p)  pEl.value  = ref.p;
+  }
+}
+
+function rnDpKcal() {
+  const vol   = parseFloat(document.getElementById('rn-dp-vol')?.value)  || 2000;
+  const intx  = parseFloat(document.getElementById('rn-dp-intx')?.value) || 4;
+  const gluc  = parseFloat(document.getElementById('rn-dp-gluc')?.value) || 1.5;
+  // Absorción ~60-70% de la glucosa del dializado
+  // Glucosa g/L según concentración: 1.5%=15g/L, 2.5%=25g/L, 4.25%=42.5g/L
+  const glucGperL = { 1.5:15, 2.5:25, 4.25:42.5 }[gluc] || 15;
+  const totalGlucG = glucGperL * (vol/1000) * intx;
+  const kcalAbs    = Math.round(totalGlucG * 0.65 * 4); // 65% absorción × 4 kcal/g
+  const el = document.getElementById('rn-dp-kcal');
+  if (el) el.textContent = kcalAbs + ' kcal/día';
+}
+
+function rnPefCheck() {
+  const crit = ['rn-pef-alb','rn-pef-imc','rn-pef-ingesta','rn-pef-masa']
+    .filter(id => document.getElementById(id)?.checked).length;
+  const el = document.getElementById('rn-pef-resultado');
+  if (!el) return;
+  if (crit >= 3) {
+    el.style.background = '#ef444422'; el.style.color = '#ef4444';
+    el.textContent = `✘ DPE-ERC probable (${crit}/4 criterios) — intervención nutricional urgente`;
+    const nivelEl = document.getElementById('rn-pef-nivel');
+    if (nivelEl && !nivelEl.value) nivelEl.value = crit === 4 ? 'severo' : 'moderado';
+  } else if (crit >= 1) {
+    el.style.background = '#f59e0b22'; el.style.color = '#92400e';
+    el.textContent = `⚠ Riesgo de DPE (${crit}/4) — vigilancia nutricional estrecha`;
+  } else {
+    el.style.background = '#22c55e22'; el.style.color = '#15803d';
+    el.textContent = '✔ Sin criterios de DPE actualmente';
+  }
+}
+
+async function saveRenal() {
+  const vid = State.currentVisita?.id;
+  if (!vid) return;
+  const getV  = id => document.getElementById(id)?.value   || null;
+  const getN  = id => parseFloat(document.getElementById(id)?.value) || null;
+  const getCh = id => document.getElementById(id)?.checked ? 1 : 0;
+
+  const ps   = getN('rn-ps');
+  const ppre = getN('rn-ppre');
+  const ganKg  = ps && ppre ? parseFloat((ppre - ps).toFixed(2)) : null;
+  const ganPct = ps && ganKg ? parseFloat((ganKg / ps * 100).toFixed(1)) : null;
+
+  const ca = getN('rn-calcio');
+  const p  = getN('rn-fosforo');
+
+  const body = {
+    fecha: State.currentVisita.fecha,
+    estadio_erc:    getV('rn-estadio'),
+    modalidad:      getV('rn-modalidad'),
+    acceso_vascular:getV('rn-acceso'),
+    fecha_inicio_dialisis:    getV('rn-fecha-dial'),
+    tiempo_en_dialisis_meses: getN('rn-tiempo-dial'),
+    peso_seco:          ps,
+    peso_pre_dialisis:  ppre,
+    peso_post_dialisis: getN('rn-ppost'),
+    ganancia_interdial_kg:  ganKg,
+    ganancia_interdial_pct: ganPct,
+    sesiones_semana:  parseInt(getV('rn-sesiones')) || 3,
+    duracion_sesion_h:parseFloat(getV('rn-duracion')) || 4,
+    diuresis_residual_ml: getN('rn-diuresis'),
+    funcion_renal_residual: getCh('rn-frr'),
+    ktv_sp:      getN('rn-ktv-sp'),
+    ktv_meta:    1.2,
+    pre_bun:     getN('rn-bun-pre'),
+    post_bun:    getN('rn-bun-post'),
+    ktv_calculado: parseFloat(document.getElementById('rn-ktv-calc')?.textContent) || null,
+    calcio:      ca,
+    fosforo:     p,
+    producto_ca_p: ca && p ? parseFloat((ca*p).toFixed(1)) : null,
+    pth_intacta: getN('rn-pth'),
+    vitamina_d_25:    getN('rn-vitd'),
+    bicarbonato: getN('rn-hco3'),
+    albumina_renal:   getN('rn-alb'),
+    prealbumin:  getN('rn-prealb'),
+    hemoglobina: getN('rn-hb'),
+    hematocrito: getN('rn-hto'),
+    ferritina:   getN('rn-ferr'),
+    saturacion_transferrina: getN('rn-sat-tf'),
+    epo_dosis:   getV('rn-epo'),
+    hierro_iv:   getCh('rn-hierro-iv'),
+    restriccion_na_mg:  getN('rn-rest-na'),
+    restriccion_k_mg:   getN('rn-rest-k'),
+    restriccion_p_mg:   getN('rn-rest-p'),
+    restriccion_agua_ml:getN('rn-rest-agua'),
+    proteina_g_dia:     getN('rn-prot-dia'),
+    malnutricion_pef:   getCh('rn-pef-alb') || getCh('rn-pef-imc') || getCh('rn-pef-ingesta') || getCh('rn-pef-masa') ? 1 : 0,
+    pef_nivel:   getV('rn-pef-nivel'),
+    dp_modalidad:getV('rn-dp-mod'),
+    dp_intercambios: getN('rn-dp-intx'),
+    dp_volumen_ml:   getN('rn-dp-vol'),
+    dp_glucosa_concentracion: getV('rn-dp-gluc') ? getV('rn-dp-gluc')+'%' : null,
+    dp_kcal_glucosa: parseFloat(document.getElementById('rn-dp-kcal')?.textContent) || null,
+    notas: getV('rn-notas'),
+  };
+
+  await api(`/visitas/${vid}/renal`, 'POST', body);
+  toast('Módulo renal guardado ✓');
+  if (State.currentVisita) State.currentVisita.renal = body;
 }
 
 // ════════════════════════════════════════════════════════════
@@ -4560,6 +5977,275 @@ async function deleteFarmacoCatalogo(fid, nombre, btn) {
 // INFORME CLÍNICO IMPRIMIBLE
 // ════════════════════════════════════════════════════════════
 
+// ── BUSCADOR GLOBAL DE FÁRMACOS ────────────────────────────────
+function onFarmBusquedaGlobal() {
+  const q   = document.getElementById('farm-busqueda-global')?.value.trim().toLowerCase();
+  const res = document.getElementById('farm-busqueda-resultados');
+  if (!res) return;
+  if (!q || q.length < 2) { res.style.display = 'none'; return; }
+
+  const matches = FarmState.catalogo.filter(f =>
+    f.nombre?.toLowerCase().includes(q) ||
+    (f.nombres_comer || []).some(n => n.toLowerCase().includes(q)) ||
+    f.clase?.toLowerCase().includes(q)
+  ).slice(0, 12);
+
+  if (!matches.length) {
+    res.style.display = 'block';
+    res.innerHTML = `<div style="padding:12px;color:var(--muted);font-size:13px">Sin resultados para "${q}"</div>`;
+    return;
+  }
+
+  const semColor = { verde:'#16a34a', amarillo:'#d97706', rojo:'#dc2626', gris:'#6b7280' };
+  res.style.display = 'block';
+  res.innerHTML = matches.map(f => {
+    const sem = f.semaforo_actual || 'gris';
+    const comercial = f.nombres_comer?.length ? `<span style="color:var(--muted);font-size:11px"> · ${f.nombres_comer.join(', ')}</span>` : '';
+    return `<div onclick="farmSeleccionarDesdeSearch(${f.id})"
+      style="padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;transition:background .1s"
+      onmouseover="this.style.background='#eff6ff'" onmouseout="this.style.background=''">
+      <span style="width:10px;height:10px;border-radius:50%;background:${semColor[sem]||'#999'};flex-shrink:0"></span>
+      <div>
+        <div style="font-size:13px;font-weight:600">${f.nombre}${comercial}</div>
+        <div style="font-size:11px;color:var(--muted)">${f.clase} · ${SEMAFORO_LABEL[sem]||sem}</div>
+      </div>
+      <button onclick="event.stopPropagation();farmAgregarDirecto(${f.id})" class="btn btn-primary btn-xs" style="margin-left:auto">+ Agregar</button>
+    </div>`;
+  }).join('');
+}
+
+function farmSeleccionarDesdeSearch(fid) {
+  document.getElementById('farm-busqueda-global').value = '';
+  document.getElementById('farm-busqueda-resultados').style.display = 'none';
+  openAddFarmacoModal(fid);
+}
+
+function farmAgregarDirecto(fid) {
+  document.getElementById('farm-busqueda-global').value = '';
+  document.getElementById('farm-busqueda-resultados').style.display = 'none';
+  openAddFarmacoModal(fid);
+}
+
+// cerrar resultados al click fuera
+document.addEventListener('click', e => {
+  if (!e.target.closest('#farm-busqueda-global') && !e.target.closest('#farm-busqueda-resultados')) {
+    const r = document.getElementById('farm-busqueda-resultados');
+    if (r) r.style.display = 'none';
+  }
+});
+
+// ── IMPRIMIR RECETA ────────────────────────────────────────────
+function imprimirReceta() {
+  const v   = State.currentVisita;
+  const pac = State.currentPaciente;
+  if (!v || !pac) { toast('No hay visita activa', 'err'); return; }
+
+  const farmacos = FarmState.visita_farmacos || [];
+  const now = new Date().toLocaleDateString('es-DO', { day:'2-digit', month:'long', year:'numeric' });
+  const edad = calcAge(pac.fecha_nacimiento);
+
+  const filasFarm = farmacos.length
+    ? farmacos.map((f, i) => `
+        <tr>
+          <td style="padding:8px 6px;font-size:13px;font-weight:600;border-bottom:1px solid #eee">${i+1}. ${f.nombre}</td>
+          <td style="padding:8px 6px;font-size:13px;border-bottom:1px solid #eee">${f.dosis || '—'}</td>
+          <td style="padding:8px 6px;font-size:13px;border-bottom:1px solid #eee">${f.frecuencia || '—'}</td>
+          <td style="padding:8px 6px;font-size:13px;border-bottom:1px solid #eee">${f.notas || ''}</td>
+        </tr>`).join('')
+    : `<tr><td colspan="4" style="padding:16px;color:#999;font-size:13px">Sin fármacos registrados</td></tr>`;
+
+  const instNombre = v.institucion==='UM' ? INST.um : v.institucion==='MAT' ? INST.mat : INST.priv;
+
+  const html = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">
+  <title>Receta — ${pac.nombre_completo || pac.nombre}</title>
+  <style>
+    @page { size: A4; margin: 20mm 18mm; }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body { font-family: Arial, Helvetica, sans-serif; color: #111; font-size: 13px; line-height:1.5; }
+    .header { display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid #1a2a4a; padding-bottom:14px; margin-bottom:18px; }
+    .logo-wrap { display:flex; align-items:center; gap:12px; }
+    .logo-wrap img { height:60px; width:auto; }
+    .logo-text h1 { font-size:16px; color:#1a2a4a; font-weight:700; }
+    .logo-text p  { font-size:11px; color:#555; margin:1px 0; }
+    .logo-text .inst { font-size:10px; color:#b8860b; font-weight:700; margin-top:3px; text-transform:uppercase; letter-spacing:.5px; }
+    .fecha-area { text-align:right; font-size:12px; color:#555; line-height:1.7; }
+    .fecha-area strong { font-size:13px; color:#1a2a4a; display:block; }
+    .paciente-box { background:#f0f7ff; border-left:4px solid #2563eb; border-radius:0 8px 8px 0; padding:12px 16px; margin-bottom:18px; }
+    .paciente-box h3 { margin:0 0 4px; font-size:15px; color:#1e40af; font-weight:700; }
+    .paciente-box p  { margin:2px 0; font-size:12px; color:#374151; }
+    table { width:100%; border-collapse:collapse; margin-bottom:20px; }
+    thead th { background:#1a2a4a; color:#fff; padding:8px 10px; font-size:11px; text-align:left; font-weight:600; }
+    tbody tr:nth-child(even){background:#f9fafb}
+    tbody td { padding:8px 10px; border-bottom:1px solid #e5e7eb; vertical-align:top; font-size:12px; }
+    .firma { margin-top:44px; display:flex; justify-content:flex-end; }
+    .firma-box { text-align:center; width:240px; }
+    .firma-linea { border-top:1px solid #555; padding-top:8px; margin-bottom:4px; }
+    .firma-box p { font-size:12px; color:#333; margin:1px 0; }
+    .firma-box .gold { color:#b8860b; font-weight:700; font-size:13px; }
+    .advertencia { font-size:9px; color:#aaa; margin-top:24px; border-top:1px dashed #ddd; padding-top:8px; text-align:center; }
+    @media print { body{-webkit-print-color-adjust:exact;print-color-adjust:exact} }
+  </style></head><body>
+  <div class="header">
+    <div class="logo-wrap">
+      <img src="${LOGO_B64}" alt="Logo">
+      <div class="logo-text">
+        <h1>${INST.nombre}</h1>
+        <p>${INST.titulo}</p>
+        <p>${INST.registro}</p>
+        <p class="inst">${instNombre}</p>
+      </div>
+    </div>
+    <div class="fecha-area">
+      <strong>PRESCRIPCIÓN NUTRICIONAL</strong>
+      Fecha: ${now}<br>Visita #${v.numero_visita || '?'}<br>Tel: ${INST.tel}<br>${INST.email}
+    </div>
+  </div>
+  <div class="paciente-box">
+    <h3>${pac.nombre_completo || pac.nombre + ' ' + pac.apellidos}</h3>
+    <p>Cédula: ${pac.cedula || '—'} &nbsp;·&nbsp; Edad: ${edad} años &nbsp;·&nbsp; Sexo: ${pac.sexo === 'F' ? 'Femenino' : 'Masculino'}</p>
+    <p>Institución: ${v.institucion || '—'} &nbsp;·&nbsp; Motivo: ${v.motivo_consulta || '—'}</p>
+  </div>
+  <table>
+    <thead><tr>
+      <th style="width:35%">Medicamento</th>
+      <th style="width:20%">Dosis</th>
+      <th style="width:20%">Frecuencia</th>
+      <th style="width:25%">Indicaciones</th>
+    </tr></thead>
+    <tbody>${filasFarm}</tbody>
+  </table>
+  ${v.notas_clinicas ? `<p style="font-size:12px;margin-bottom:16px"><strong>Notas clínicas:</strong> ${v.notas_clinicas}</p>` : ''}
+  <div class="firma">
+    <div class="firma-box">
+      <div class="firma-linea"></div>
+      <p class="gold">${INST.nombre}</p>
+      <p>${INST.titulo}</p>
+      <p>${INST.registro}</p>
+    </div>
+  </div>
+  <div class="advertencia">Este documento es una prescripción nutricional emitida por un profesional certificado. No sustituye la consulta médica.</div>
+  <script>window.onload = () => { window.print(); }<\/script>
+  </body></html>`;
+
+  const win = window.open('', '_blank', 'width=800,height=900');
+  win.document.write(html);
+  win.document.close();
+}
+
+// ── IMPRIMIR DIETA ─────────────────────────────────────────────
+function imprimirDieta() {
+  const v   = State.currentVisita;
+  const pac = State.currentPaciente;
+  if (!v || !pac) { toast('No hay visita activa', 'err'); return; }
+
+  const r   = v.requerimientos || {};
+  const plan = v.plan_nutricional || {};
+  const r24 = v.registro_24h || {};
+  const now = new Date().toLocaleDateString('es-DO', { day:'2-digit', month:'long', year:'numeric' });
+  const edad = calcAge(pac.fecha_nacimiento);
+
+  const distribucion = (kcal) => {
+    if (!kcal) return '';
+    const des = Math.round(kcal * 0.25);
+    const alm = Math.round(kcal * 0.35);
+    const cen = Math.round(kcal * 0.25);
+    const col = Math.round(kcal * 0.15);
+    return `<table style="width:100%;border-collapse:collapse;margin-bottom:16px">
+      <thead><tr>
+        <th style="background:#2563eb;color:#fff;padding:7px 10px;font-size:12px;text-align:left">Tiempo de comida</th>
+        <th style="background:#2563eb;color:#fff;padding:7px 10px;font-size:12px;text-align:center">% kcal</th>
+        <th style="background:#2563eb;color:#fff;padding:7px 10px;font-size:12px;text-align:center">kcal</th>
+        <th style="background:#2563eb;color:#fff;padding:7px 10px;font-size:12px">Orientación</th>
+      </tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #eee"><td style="padding:7px 10px">🌅 Desayuno</td><td style="padding:7px 10px;text-align:center">25%</td><td style="padding:7px 10px;text-align:center;font-weight:700">${des}</td><td style="padding:7px 10px;font-size:12px;color:#555">${r24.desayuno || 'Según plan indicado'}</td></tr>
+        <tr style="border-bottom:1px solid #eee;background:#f9fafb"><td style="padding:7px 10px">🍎 Media mañana</td><td style="padding:7px 10px;text-align:center">10%</td><td style="padding:7px 10px;text-align:center;font-weight:700">${col}</td><td style="padding:7px 10px;font-size:12px;color:#555">Colación saludable</td></tr>
+        <tr style="border-bottom:1px solid #eee"><td style="padding:7px 10px">🍽 Almuerzo</td><td style="padding:7px 10px;text-align:center">35%</td><td style="padding:7px 10px;text-align:center;font-weight:700">${alm}</td><td style="padding:7px 10px;font-size:12px;color:#555">${r24.almuerzo || 'Plato principal balanceado'}</td></tr>
+        <tr style="border-bottom:1px solid #eee;background:#f9fafb"><td style="padding:7px 10px">☕ Merienda</td><td style="padding:7px 10px;text-align:center">5%</td><td style="padding:7px 10px;text-align:center;font-weight:700">${Math.round(kcal*0.05)}</td><td style="padding:7px 10px;font-size:12px;color:#555">Colación ligera</td></tr>
+        <tr><td style="padding:7px 10px">🌙 Cena</td><td style="padding:7px 10px;text-align:center">25%</td><td style="padding:7px 10px;text-align:center;font-weight:700">${cen}</td><td style="padding:7px 10px;font-size:12px;color:#555">${r24.cena || 'Cena ligera'}</td></tr>
+      </tbody>
+    </table>`;
+  };
+
+  const kcalPres = r.kcal_objetivo || plan.kcal_prescritas || null;
+  const protPres = r.proteina_objetivo_g || plan.proteina_prescrita || null;
+  const aguaL    = r.agua_total_l || plan.agua_recomendada || null;
+
+  const html = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">
+  <title>Plan dietético — ${pac.nombre_completo || pac.nombre}</title>
+  <style>
+    @page { size: A4; margin: 18mm; }
+    body { font-family: Arial, sans-serif; color: #111; font-size: 13px; }
+    .header { display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2px solid #16a34a; padding-bottom:12px; margin-bottom:18px; }
+    .logo-area h1 { font-size:22px; color:#16a34a; font-weight:700; margin:0; }
+    .logo-area p  { font-size:12px; color:#555; margin:2px 0 0; }
+    .fecha-area   { text-align:right; font-size:12px; color:#555; }
+    .pac-box { background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:12px 16px; margin-bottom:16px; }
+    .pac-box h3 { margin:0 0 4px; font-size:15px; color:#15803d; }
+    .metas { display:flex; gap:12px; margin-bottom:16px; flex-wrap:wrap; }
+    .meta-card { flex:1; min-width:120px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:10px 14px; text-align:center; }
+    .meta-card .val { font-size:22px; font-weight:700; color:#15803d; font-family:monospace; }
+    .meta-card .lbl { font-size:11px; color:#555; margin-top:2px; }
+    .sec-title { font-size:13px; font-weight:700; color:#15803d; border-bottom:1px solid #bbf7d0; padding-bottom:4px; margin:16px 0 10px; text-transform:uppercase; letter-spacing:.05em; }
+    .recomendaciones { background:#f9fafb; border:1px solid #e5e7eb; border-radius:8px; padding:12px 16px; font-size:12px; line-height:1.7; white-space:pre-line; }
+    .firma { margin-top:36px; border-top:1px solid #ccc; padding-top:10px; text-align:center; font-size:12px; color:#555; }
+    .prox { background:#fffbeb; border:1px solid #fde68a; border-radius:6px; padding:8px 14px; font-size:12px; margin-top:16px; }
+  </style></head><body>
+  <div class="header">
+    <div class="logo-wrap">
+      <img src="${LOGO_B64}" alt="Logo" style="height:56px;width:auto">
+      <div class="logo-text">
+        <h1 style="font-size:16px;color:#15803d;font-weight:700">${INST.nombre}</h1>
+        <p style="font-size:11px;color:#555">${INST.titulo}</p>
+        <p style="font-size:10px;color:#b8860b;font-weight:700;text-transform:uppercase">${v.institucion==='UM'?INST.um:v.institucion==='MAT'?INST.mat:INST.priv}</p>
+      </div>
+    </div>
+    <div class="fecha-area">
+      <strong style="color:#15803d;display:block">PLAN DIETÉTICO</strong>
+      Fecha: ${now}<br>Visita #${v.numero_visita || '?'}<br>${INST.tel}<br>${INST.email}
+    </div>
+  </div>
+
+  <div class="pac-box">
+    <h3>${pac.nombre_completo || pac.nombre + ' ' + pac.apellidos}</h3>
+    <p>Edad: ${edad} años &nbsp;·&nbsp; Sexo: ${pac.sexo === 'F' ? 'Femenino' : 'Masculino'} &nbsp;·&nbsp; Cédula: ${pac.cedula || '—'}</p>
+    <p>Objetivo: <strong>${plan.objetivo_principal || r.condicion_proteica || '—'}</strong></p>
+  </div>
+
+  <div class="sec-title">Metas nutricionales prescritas</div>
+  <div class="metas">
+    ${kcalPres ? `<div class="meta-card"><div class="val">${kcalPres}</div><div class="lbl">kcal / día</div></div>` : ''}
+    ${protPres ? `<div class="meta-card"><div class="val">${protPres}g</div><div class="lbl">Proteína / día</div></div>` : ''}
+    ${r.cho_objetivo_g ? `<div class="meta-card"><div class="val">${r.cho_objetivo_g}g</div><div class="lbl">CHO / día</div></div>` : ''}
+    ${r.grasa_objetivo_g ? `<div class="meta-card"><div class="val">${r.grasa_objetivo_g}g</div><div class="lbl">Grasa / día</div></div>` : ''}
+    ${aguaL ? `<div class="meta-card"><div class="val">${parseFloat(aguaL).toFixed(1)}L</div><div class="lbl">Agua / día</div></div>` : ''}
+  </div>
+
+  <div class="sec-title">Distribución de comidas</div>
+  ${distribucion(kcalPres)}
+
+  ${plan.indicaciones || plan.suplementacion ? `
+  <div class="sec-title">Indicaciones y suplementación</div>
+  <div class="recomendaciones">${[plan.indicaciones, plan.suplementacion ? '💊 Suplementación: ' + plan.suplementacion : ''].filter(Boolean).join('\n\n')}</div>` : ''}
+
+  ${plan.proxima_evaluacion || v.proxima_cita ? `
+  <div class="prox">📅 Próxima evaluación: <strong>${plan.proxima_evaluacion || v.proxima_cita || '—'}</strong></div>` : ''}
+
+  <div class="firma" style="margin-top:36px;border-top:1px solid #ccc;padding-top:10px;display:flex;justify-content:flex-end">
+    <div style="text-align:center;width:240px">
+      <p style="font-size:12px;color:#333"><strong>${INST.nombre}</strong></p>
+      <p style="font-size:12px;color:#555">${INST.titulo}</p>
+      <p style="font-size:11px;color:#888">${INST.registro} &nbsp;·&nbsp; ${INST.tel}</p>
+    </div>
+  </div>
+  <script>window.onload = () => { window.print(); }<\/script>
+  </body></html>`;
+
+  const win = window.open('', '_blank', 'width=820,height=950');
+  win.document.write(html);
+  win.document.close();
+}
+
 function generarInforme() {
   const v   = State.currentVisita;
   const pac = State.currentPaciente;
@@ -4593,48 +6279,52 @@ function generarInforme() {
   const imcLabel = imc ? (imc<18.5?'Bajo peso':imc<25?'Normal':imc<30?'Sobrepeso':imc<35?'Obesidad I':imc<40?'Obesidad II':'Obesidad III') : '';
 
   const ccHTML = tabla([
-    row('Peso',      cc.peso,   'kg'),
-    row('Talla',     cc.talla,  'cm'),
-    row('IMC',       imc ? `${imc} <em style="font-weight:400;color:#555">(${imcLabel})</em>` : null, 'kg/m²'),
-    row('Cintura',   cc.cintura_cm,    'cm'),
-    row('Cadera',    cc.cadera_cm,     'cm'),
-    row('ICC',       cc.icc ? cc.icc.toFixed(2) : null),
-    row('Masa muscular', cc.masa_muscular_kg, 'kg'),
-    row('Masa grasa',    cc.masa_grasa_kg,   'kg'),
-    row('% Grasa',       cc.grasa_pct ? cc.grasa_pct.toFixed(1) : null, '%'),
-    row('Agua corporal', cc.agua_pct   ? cc.agua_pct.toFixed(1)  : null, '%'),
-    row('Masa ósea',     cc.masa_osea_kg, 'kg'),
-    row('Masa visceral', cc.grasa_visceral_nivel ? 'Nivel '+cc.grasa_visceral_nivel : null),
-    row('Edad metabólica', cc.edad_metabolica, 'años'),
-    row('Fuerza prensil Dcha', cc.fuerza_prensil_d, 'kg'),
-    row('Fuerza prensil Izda', cc.fuerza_prensil_i, 'kg'),
+    row('Peso',           cc.peso,   'kg'),
+    row('Talla',          cc.talla,  'cm'),
+    row('IMC',            imc ? `${imc} <em style="font-weight:400;color:#555">(${imcLabel})</em>` : null, 'kg/m²'),
+    row('Cintura',        cc.cintura,        'cm'),
+    row('Cadera',         cc.cadera,         'cm'),
+    row('ICC',            cc.cintura_cadera  ? parseFloat(cc.cintura_cadera).toFixed(2) : null),
+    row('Cintura/Talla',  cc.cintura_talla   ? parseFloat(cc.cintura_talla).toFixed(3)  : null),
+    row('Masa muscular',  cc.kg_masa_muscular, 'kg'),
+    row('Masa grasa',     cc.kg_grasa,         'kg'),
+    row('% Grasa',        cc.pct_grasa ? parseFloat(cc.pct_grasa).toFixed(1) : null, '%'),
+    row('Agua corporal',  cc.agua_corporal,    'kg'),
+    row('Masa ósea',      cc.masa_osea,        'kg'),
+    row('Fuerza prensil', cc.handgrip_der_mejor ? `${cc.handgrip_der_mejor} kg (${cc.handgrip_interpretacion||'—'})` : null),
     row('Velocidad marcha', cc.velocidad_marcha, 'm/s'),
+    row('Sit-to-Stand',   cc.sit_to_stand_reps ? `${cc.sit_to_stand_reps} rep (${cc.sit_to_stand_interp||'—'})` : null),
+    row('SARC-F',         cc.sarcf_total !== null && cc.sarcf_total !== undefined ? `${cc.sarcf_total}/10 — ${cc.sarcf_interpretacion||''}` : null),
+    row('Equipo',         cc.equipo),
   ].filter(Boolean).join(''));
 
   // ── Analíticas ─────────────────────────────────────────────
   const anHTML = tabla([
-    row('Glucosa',      an.glucosa,      'mg/dL'),
-    row('HbA1c',        an.hba1c,        '%'),
-    row('Insulina',     an.insulina,     'µU/mL'),
-    row('HOMA-IR',      an.homa_ir ? an.homa_ir.toFixed(2) : null),
-    row('Colesterol total', an.colesterol_total, 'mg/dL'),
-    row('LDL',          an.ldl,          'mg/dL'),
-    row('HDL',          an.hdl,          'mg/dL'),
-    row('Triglicéridos', an.trigliceridos, 'mg/dL'),
-    row('Creatinina',   an.creatinina,   'mg/dL'),
-    row('BUN',          an.bun,          'mg/dL'),
-    row('eGFR (CKD-EPI)', an.egfr ? `${an.egfr.toFixed(0)} <em style="color:#555;font-weight:400">${an.egfr_estadio||''}</em>` : null, 'mL/min/1.73m²'),
-    row('Ácido úrico',  an.acido_urico,  'mg/dL'),
-    row('ALT (TGP)',    an.alt,          'U/L'),
-    row('AST (TGO)',    an.ast,          'U/L'),
-    row('Hemoglobina',  an.hemoglobina,  'g/dL'),
-    row('Ferritina',    an.ferritina,    'ng/mL'),
-    row('Vitamina D',   an.vitamina_d,   'ng/mL'),
-    row('Vitamina B12', an.vitamina_b12, 'pg/mL'),
-    row('TSH',          an.tsh,          'mIU/L'),
-    row('Albúmina',     an.albumina,     'g/dL'),
-    row('PCR',          an.pcr,          'mg/L'),
-    row('Proteinuria',  an.proteinuria,  'mg/24h'),
+    row('Glucemia ayunas', an.glucemia_ayunas, 'mg/dL'),
+    row('HbA1c',           an.hba1c,           '%'),
+    row('Insulina basal',  an.insulina_ayunas, 'µU/mL'),
+    row('HOMA-IR',         an.homa_ir ? `${parseFloat(an.homa_ir).toFixed(2)} (${an.homa_interpretacion||''})` : null),
+    row('Colesterol total',an.colesterol_total,'mg/dL'),
+    row('LDL',             an.ldl,             'mg/dL'),
+    row('HDL',             an.hdl,             'mg/dL'),
+    row('No-HDL',          an.no_hdl,          'mg/dL'),
+    row('Triglicéridos',   an.trigliceridos,   'mg/dL'),
+    row('ApoB',            an.apob,            'mg/dL'),
+    row('Índice aterogénico', an.indice_aterogenico ? parseFloat(an.indice_aterogenico).toFixed(2) : null),
+    row('Creatinina',      an.creatinina,      'mg/dL'),
+    row('BUN',             an.bun,             'mg/dL'),
+    row('eGFR (CKD-EPI)',  an.egfr ? `${parseFloat(an.egfr).toFixed(0)} — ${an.egfr_estadio||''}` : null, 'mL/min/1.73m²'),
+    row('Ácido úrico',     an.acido_urico,     'mg/dL'),
+    row('ALT (TGP)',       an.alt,             'U/L'),
+    row('AST (TGO)',       an.ast,             'U/L'),
+    row('Hemoglobina',     an.hemoglobina,     'g/dL'),
+    row('Ferritina',       an.ferritina,       'ng/mL'),
+    row('Vitamina D 25-OH',an.vitamina_d,      'ng/mL'),
+    row('Vitamina B12',    an.vitamina_b12,    'pg/mL'),
+    row('TSH',             an.tsh,             'mIU/L'),
+    row('Albúmina',        an.albumina,        'g/dL'),
+    row('PCR',             an.pcr,             'mg/L'),
+    row('Proteinuria',     an.proteinuria,     'mg/24h'),
   ].filter(Boolean).join(''));
 
   // ── Requerimientos ─────────────────────────────────────────
@@ -4681,27 +6371,45 @@ function generarInforme() {
   ].filter(Boolean).join(''));
 
   // ── Fármacos activos ───────────────────────────────────────
-  const farmacos = v.farmacos_activos || [];
+  const farmacos = v.farmacoterapia || [];
   const farmHTML = farmacos.length
     ? `<table class="data-tbl">
-        <tr><th>Medicamento</th><th>Clase</th><th>Dosis</th><th>Seguridad renal</th></tr>
+        <tr><th>Medicamento</th><th>Clase</th><th>Dosis / Frecuencia</th><th>Seg. renal</th></tr>
         ${farmacos.map(f => `
           <tr>
-            <td>${f.nombre}</td>
+            <td>${f.nombre_comercial||f.nombre_generico||f.nombre||'—'}</td>
             <td style="color:#555;font-size:11px">${f.clase||''}</td>
-            <td>${f.dosis||''} ${f.frecuencia||''}</td>
+            <td>${[f.dosis,f.frecuencia].filter(Boolean).join(' ')}</td>
             <td style="font-size:11px">${f.semaforo_visita ? semLabel[f.semaforo_visita]||f.semaforo_visita : '—'}</td>
           </tr>`).join('')}
       </table>`
     : '<p style="color:#888;font-size:12px;margin:4px 0">Sin fármacos registrados en esta visita.</p>';
 
   // ── Plan nutricional y notas ───────────────────────────────
-  const planHTML = v.plan_nutricional
-    ? `<div class="texto-libre">${v.plan_nutricional.replace(/\n/g,'<br>')}</div>` : '';
-  const notasHTML = (r.notas || v.observaciones)
-    ? `<div class="texto-libre">${(r.notas||v.observaciones||'').replace(/\n/g,'<br>')}</div>` : '';
-  const suplHTML = r.suplementacion
-    ? `<div class="texto-libre">${r.suplementacion.replace(/\n/g,'<br>')}</div>` : '';
+  const pn = v.plan_nutricional || {};
+  const planTxt = pn.texto_libre || pn.recomendaciones || pn.plan || '';
+  const planHTML = planTxt
+    ? `<div class="texto-libre">${planTxt.replace(/\n/g,'<br>')}</div>` : '';
+  const notasTxt = v.notas_clinicas || v.plan_general || '';
+  const notasHTML = notasTxt
+    ? `<div class="texto-libre">${notasTxt.replace(/\n/g,'<br>')}</div>` : '';
+  const suplHTML = (r.suplementacion||pn.suplementacion)
+    ? `<div class="texto-libre">${(r.suplementacion||pn.suplementacion||'').replace(/\n/g,'<br>')}</div>` : '';
+
+  // ── Diagnóstico nutricional ────────────────────────────────
+  const dn  = v.diagnostico_nutricional || {};
+  const dnHTML = dn.estado_global ? `
+    <div style="background:#f0f4ff;border-left:4px solid #1a56db;border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:10px;font-size:12px;font-weight:600;color:#1a1a1a">
+      ${dn.estado_global}
+    </div>
+    ${tabla([
+      row('GLIM — Fenotípico',  dn.glim_fenotipico),
+      row('GLIM — Etiológico',  dn.glim_etiologico),
+      row('GLIM — Diagnóstico', dn.glim_diagnostico),
+      row('Sarcopenia (EWGSOP2)', dn.sarcopenia_dx),
+      row('Riesgo cardiometabólico', dn.riesgo_cardiometabolico),
+      row('Obesidad clínica',   dn.obesidad_clinica_dx),
+    ].filter(Boolean).join(''))}` : '<p style="color:#888;font-size:11px">Sin diagnóstico registrado.</p>';
 
   // ── Construir HTML del reporte ─────────────────────────────
   const html = `<!DOCTYPE html>
@@ -4796,16 +6504,17 @@ function generarInforme() {
 
   <!-- ─── Encabezado ──────────────────────────────────────── -->
   <div class="hdr">
-    <div>
-      <div class="clinic-name">Consulta de Nutrición Clínica</div>
-      <div class="clinic-sub">Dra. Anayanet Jáquez · Nutricionista Clínica</div>
-      <div class="clinic-sub">Unión Médica del Norte · Centro Materno</div>
-      <div class="report-label" style="margin-top:6px">📋 Informe Nutricional</div>
+    <div style="display:flex;align-items:center;gap:14px">
+      <img src="${LOGO_B64}" alt="Logo" style="height:64px;width:auto">
+      <div>
+        <div class="clinic-name">${INST.nombre}</div>
+        <div class="clinic-sub">${INST.titulo}</div>
+        <div class="clinic-sub" style="color:#b8860b;font-weight:600">${v.institucion==='UM'?INST.um:v.institucion==='MAT'?INST.mat:INST.priv}</div>
+        <div class="report-label" style="margin-top:6px">📋 Informe Nutricional</div>
+      </div>
     </div>
     <div class="hdr-logo">
-      <div style="font-size:18px;font-weight:700;color:#1a56db;letter-spacing:-1px">NC</div>
-      <div style="font-size:10px;color:#888;margin-top:2px">Plataforma NutriCare</div>
-      <div style="font-size:10px;color:#aaa;margin-top:8px">Fecha emisión:<br><strong style="color:#555">${now}</strong></div>
+      <div style="font-size:10px;color:#aaa;margin-top:8px;text-align:right">Fecha emisión:<br><strong style="color:#555">${now}</strong><br>${INST.tel}<br>${INST.email}</div>
     </div>
   </div>
 
@@ -4832,6 +6541,9 @@ function generarInforme() {
     </div>
   </div>
 
+  <!-- ─── Diagnóstico Nutricional ──────────────────────────── -->
+  ${seccion('Diagnóstico nutricional', dnHTML)}
+
   <!-- ─── Requerimientos ──────────────────────────────────── -->
   ${Object.keys(r).length > 0 ? `
   <div class="g2">
@@ -4843,7 +6555,7 @@ function generarInforme() {
   ${seccion('Medicamentos activos', farmHTML)}
 
   <!-- ─── Suplementación ──────────────────────────────────── -->
-  ${r.suplementacion ? seccion('Suplementación indicada', suplHTML) : ''}
+  ${suplHTML ? seccion('Suplementación indicada', suplHTML) : ''}
 
   <!-- ─── Plan nutricional ────────────────────────────────── -->
   ${planHTML ? seccion('Plan nutricional', planHTML) : ''}
@@ -4871,9 +6583,9 @@ function generarInforme() {
   <!-- ─── Firma ───────────────────────────────────────────── -->
   <div class="firma">
     <div class="firma-box">
-      <div class="fn">Dra. Anayanet Jáquez</div>
-      <div>Nutricionista Clínica</div>
-      <div style="color:#888;margin-top:2px">Reg. Prof. _______________</div>
+      <div class="fn">${INST.nombre}</div>
+      <div>${INST.titulo}</div>
+      <div style="color:#888;margin-top:2px">${INST.registro}</div>
     </div>
     <div class="firma-box">
       <div class="fn">Firma del paciente / Recibido por</div>
@@ -4883,7 +6595,7 @@ function generarInforme() {
 
   <!-- ─── Footer ──────────────────────────────────────────── -->
   <div class="footer">
-    <span>NutriCare — Plataforma de Nutrición Clínica · Dra. Anayanet Jáquez</span>
+    <span>NutriCare · ${INST.nombre} · ${INST.titulo}</span>
     <span>Generado: ${now} · Visita #${v.numero_visita||'?'} · ${fechaVisita}</span>
   </div>
 
@@ -4894,6 +6606,82 @@ function generarInforme() {
   const win = window.open('', '_blank', 'width=860,height=900,scrollbars=yes');
   win.document.write(html);
   win.document.close();
+}
+
+// ── PORTAL PACIENTE — PIN WHATSAPP ────────────────────────────
+async function generarPinPaciente(pid, nombre, tieneTelefono) {
+  if (!tieneTelefono) {
+    toast('Este paciente no tiene teléfono registrado. Agrégalo primero.', 'err');
+    return;
+  }
+  const res = await api(`/pacientes/${pid}/generar_pin`, 'POST', {});
+  if (!res) return;
+
+  const pin = res.pin;
+  if (res.enviado) {
+    toast(`✓ PIN ${pin} enviado por WhatsApp a ${nombre}`, 'ok');
+  } else if (res.en_cola) {
+    toast(`PIN ${pin} generado — se enviará al recuperar la red 📶`, 'warn');
+  } else if (res.sin_telefono) {
+    toast(`PIN generado: ${pin} — sin teléfono para enviar`, 'warn');
+  }
+
+  // Recargar ficha para actualizar el botón
+  openPaciente(pid);
+}
+
+// ── CONFIGURACIÓN CALLMEBOT ────────────────────────────────────
+async function abrirConfigCallmebot() {
+  const status = await api('/config/callmebot') || {};
+  const html = `
+  <div style="position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:3000;display:flex;align-items:center;justify-content:center" id="callmebot-modal" onclick="if(event.target===this)this.remove()">
+    <div style="background:var(--surface);border-radius:16px;padding:28px;width:min(460px,95vw);box-shadow:var(--shadow)" onclick="event.stopPropagation()">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
+        <span style="font-size:28px">📲</span>
+        <div>
+          <div style="font-weight:700;font-size:16px">WhatsApp · CallMeBot</div>
+          <div style="font-size:12px;color:var(--muted)">Configuración para envío de PIN a pacientes</div>
+        </div>
+      </div>
+      <div style="background:${status.configurado?'#f0fdf4':'#fffbeb'};border:1px solid ${status.configurado?'#86efac':'#fcd34d'};border-radius:10px;padding:12px 16px;margin-bottom:18px;font-size:13px">
+        ${status.configurado
+          ? `✅ <strong>Activo</strong> — CallMeBot configurado. ${status.pendientes_cola>0?`<br>⏳ ${status.pendientes_cola} PIN(s) en cola esperando red.`:''}`
+          : `⚠️ <strong>No configurado</strong> — Sigue los pasos abajo para activar.`}
+      </div>
+      <div style="background:var(--bg2);border-radius:10px;padding:14px 16px;margin-bottom:18px;font-size:12px;line-height:1.9;color:var(--text2)">
+        <strong>Registro (una sola vez):</strong><br>
+        1. Agrega este contacto en WhatsApp: <strong>+34 644 60 16 15</strong><br>
+        2. Envíale exactamente: <code style="background:var(--bg);padding:2px 6px;border-radius:4px">I allow callmebot to send me messages</code><br>
+        3. Te responde con tu <strong>API Key</strong> (ej: 1234567)<br>
+        4. Ingrésala abajo ↓
+      </div>
+      <div class="field" style="margin-bottom:12px">
+        <label style="font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.05em">Tu API Key de CallMeBot</label>
+        <input id="cb-apikey" placeholder="Ej: 1234567" style="width:100%;padding:10px 14px;border:2px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-size:15px;letter-spacing:2px;outline:none"
+               onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:18px">
+        El API Key se guarda en memoria mientras el servidor corra. Para que persista entre reinicios,
+        agrégalo como variable de entorno: <code>CALLMEBOT_APIKEY=tu_key</code>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:flex-end">
+        <button class="btn btn-ghost" onclick="document.getElementById('callmebot-modal').remove()">Cancelar</button>
+        <button class="btn btn-success" onclick="guardarCallmebot()">Guardar y activar</button>
+      </div>
+    </div>
+  </div>`;
+  document.body.insertAdjacentHTML('beforeend', html);
+}
+
+async function guardarCallmebot() {
+  const apikey = document.getElementById('cb-apikey')?.value?.trim();
+  if (!apikey) { toast('Ingresa el API Key de CallMeBot', 'err'); return; }
+  await api('/config/callmebot', 'POST', { apikey });
+  document.getElementById('callmebot-modal')?.remove();
+  toast('✓ CallMeBot activado — los PINs se enviarán por WhatsApp');
+
+  // Intentar vaciar cola pendiente
+  if (navigator.onLine) fetch(`${API}/portal/flush_queue`, { method:'POST' }).catch(()=>{});
 }
 
 // ── INIT ──────────────────────────────────────────────────────

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260" width="200" height="260">
+  <defs>
+    <linearGradient id="goldG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#d4af37"/>
+      <stop offset="40%"  stop-color="#f5e27a"/>
+      <stop offset="70%"  stop-color="#c8951a"/>
+      <stop offset="100%" stop-color="#b8860b"/>
+    </linearGradient>
+    <linearGradient id="dropG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"  stop-color="#1a2a4a"/>
+      <stop offset="100%" stop-color="#0d1b35"/>
+    </linearGradient>
+  </defs>
+
+  <!-- GOTA — borde dorado -->
+  <path d="M100 8 C100 8, 168 80, 168 138 C168 178, 138 208, 100 208 C62 208, 32 178, 32 138 C32 80, 100 8, 100 8 Z"
+    fill="url(#goldG)" />
+
+  <!-- GOTA — interior azul marino -->
+  <path d="M100 18 C100 18, 158 84, 158 138 C158 172, 132 198, 100 198 C68 198, 42 172, 42 138 C42 84, 100 18, 100 18 Z"
+    fill="url(#dropG)" />
+
+  <!-- FIGURA — persona estilizada (dorada) -->
+  <!-- cabeza -->
+  <circle cx="108" cy="68" r="10" fill="url(#goldG)"/>
+  <!-- cuerpo diagonal + brazos = forma de X estilizada -->
+  <!-- tronco -->
+  <line x1="108" y1="78" x2="90" y2="175" stroke="url(#goldG)" stroke-width="7" stroke-linecap="round"/>
+  <!-- brazo izquierdo (sube a la derecha) -->
+  <line x1="75"  y1="105" x2="130" y2="130" stroke="url(#goldG)" stroke-width="7" stroke-linecap="round"/>
+  <!-- pierna derecha -->
+  <line x1="90"  y1="175" x2="120" y2="195" stroke="url(#goldG)" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- TEXTO: DRA. ANAYANET JÁQUEZ -->
+  <text x="100" y="232"
+    font-family="'Georgia', 'Times New Roman', serif"
+    font-size="13.5"
+    font-weight="700"
+    letter-spacing="2.5"
+    fill="#1a2a4a"
+    text-anchor="middle"
+    dominant-baseline="middle">DRA. ANAYANET JÁQUEZ</text>
+
+  <!-- TEXTO: NUTRIÓLOGA CLÍNICA ESPECIALIZADA -->
+  <text x="100" y="250"
+    font-family="'Georgia', 'Times New Roman', serif"
+    font-size="8.5"
+    font-weight="400"
+    letter-spacing="2"
+    fill="#5a7298"
+    text-anchor="middle"
+    dominant-baseline="middle">NUTRIÓLOGA CLÍNICA ESPECIALIZADA</text>
+</svg>

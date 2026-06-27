@@ -7,6 +7,11 @@ from flask_cors import CORS
 import sqlite3
 import os
 import json
+import random
+import string
+import threading
+import urllib.request
+import urllib.parse
 from datetime import date, datetime
 from db_utils import (
     get_db, row_to_dict, rows_to_list, init_db,
@@ -18,7 +23,16 @@ from db_utils import (
 )
 
 app = Flask(__name__, static_folder='static', template_folder='templates')
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0   # sin caché en estáticos
 CORS(app)
+
+@app.after_request
+def no_cache(r):
+    if '/static/' in request.path:
+        r.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
+        r.headers['Pragma']  = 'no-cache'
+        r.headers['Expires'] = '0'
+    return r
 
 # ── HELPERS ──────────────────────────────────────────────────
 
@@ -237,6 +251,8 @@ def get_visita_completa(vid):
         db.execute("SELECT * FROM diagnostico_nutricional WHERE visita_id=?", (vid,)).fetchone())
     v['diabetes'] = row_to_dict(
         db.execute("SELECT * FROM diabetes_visita WHERE visita_id=?", (vid,)).fetchone())
+    v['renal'] = row_to_dict(
+        db.execute("SELECT * FROM modulo_renal WHERE visita_id=?", (vid,)).fetchone())
     db.close()
     return ok(v)
 
@@ -1109,6 +1125,64 @@ def save_requerimientos(vid):
 
 
 # ════════════════════════════════════════════════════════════
+# MÓDULO RENAL
+# ════════════════════════════════════════════════════════════
+
+@app.route('/api/visitas/<int:vid>/renal', methods=['GET'])
+def get_renal(vid):
+    db  = get_db()
+    row = row_to_dict(db.execute("SELECT * FROM modulo_renal WHERE visita_id=?", (vid,)).fetchone())
+    db.close()
+    return ok(row or {})
+
+
+@app.route('/api/visitas/<int:vid>/renal', methods=['POST'])
+def save_renal(vid):
+    db  = get_db()
+    vis = row_to_dict(db.execute("SELECT * FROM visitas WHERE id=?", (vid,)).fetchone())
+    if not vis:
+        db.close(); return err('Visita no encontrada', 404)
+
+    d = request.json or {}
+    fields = [
+        'fecha', 'estadio_erc', 'modalidad', 'fecha_inicio_dialisis',
+        'tiempo_en_dialisis_meses', 'acceso_vascular',
+        'peso_seco', 'peso_pre_dialisis', 'peso_post_dialisis',
+        'ganancia_interdial_kg', 'ganancia_interdial_pct',
+        'sesiones_semana', 'duracion_sesion_h',
+        'diuresis_residual_ml', 'funcion_renal_residual',
+        'ktv_sp', 'ktv_meta', 'pre_bun', 'post_bun', 'ktv_calculado',
+        'calcio', 'fosforo', 'producto_ca_p', 'pth_intacta',
+        'vitamina_d_25', 'bicarbonato', 'albumina_renal', 'prealbumin',
+        'hemoglobina', 'hematocrito', 'ferritina', 'saturacion_transferrina',
+        'epo_dosis', 'hierro_iv',
+        'restriccion_k_mg', 'restriccion_p_mg', 'restriccion_na_mg',
+        'restriccion_agua_ml', 'proteina_g_dia',
+        'malnutricion_pef', 'pef_nivel', 'pef_criterios',
+        'dp_modalidad', 'dp_intercambios', 'dp_volumen_ml',
+        'dp_glucosa_concentracion', 'dp_kcal_glucosa', 'notas',
+    ]
+    vals   = [d.get(f) for f in fields]
+    existe = db.execute("SELECT id FROM modulo_renal WHERE visita_id=?", (vid,)).fetchone()
+
+    if existe:
+        sets = ', '.join(f"{f}=?" for f in fields)
+        db.execute(f"UPDATE modulo_renal SET {sets} WHERE visita_id=?", vals + [vid])
+        rid = existe['id']
+    else:
+        cols = 'visita_id, paciente_id, ' + ', '.join(fields)
+        phs  = '?, ?, ' + ', '.join('?' for _ in fields)
+        cur  = db.execute(f"INSERT INTO modulo_renal ({cols}) VALUES ({phs})",
+                          [vid, vis['paciente_id']] + vals)
+        rid  = cur.lastrowid
+
+    db.commit()
+    row = row_to_dict(db.execute("SELECT * FROM modulo_renal WHERE id=?", (rid,)).fetchone())
+    db.close()
+    return ok(row, 'Módulo renal guardado')
+
+
+# ════════════════════════════════════════════════════════════
 # DIAGNÓSTICO NUTRICIONAL
 # ════════════════════════════════════════════════════════════
 
@@ -1338,19 +1412,25 @@ def save_farmaco_visita(vid):
         return err('Visita no encontrada', 404)
 
     fid = d.get('id')
+    ea_fields  = (d.get('ea_descripcion'), d.get('ea_gravedad'), d.get('ea_accion'), d.get('ea_fecha'))
+    cam_fields = (d.get('cambio_motivo'), d.get('cambio_anterior'), d.get('cambio_nueva'), d.get('cambio_fecha'), d.get('cambio_obs'))
+
     if fid:
         db.execute("""
             UPDATE farmacos_visita
             SET farmaco_id=?, farmaco_libre=?, dosis=?, frecuencia=?,
                 semaforo_calc=?, egfr_usado=?, egfr_estadio=?,
                 estado=?, override_medico=?, override_motivo=?,
-                fecha_inicio=?, fecha_fin=?, notas=?
+                fecha_inicio=?, fecha_fin=?, notas=?,
+                ea_descripcion=?, ea_gravedad=?, ea_accion=?, ea_fecha=?,
+                cambio_motivo=?, cambio_anterior=?, cambio_nueva=?, cambio_fecha=?, cambio_obs=?
             WHERE id=? AND visita_id=?
         """, (
             d.get('farmaco_id'), d.get('farmaco_libre'), d.get('dosis'), d.get('frecuencia'),
             semaforo, egfr_val, estadio,
             d.get('estado','activo'), d.get('override_medico',0), d.get('override_motivo'),
             d.get('fecha_inicio'), d.get('fecha_fin'), d.get('notas'),
+            *ea_fields, *cam_fields,
             fid, vid
         ))
     else:
@@ -1358,14 +1438,17 @@ def save_farmaco_visita(vid):
             INSERT INTO farmacos_visita
               (visita_id, paciente_id, farmaco_id, farmaco_libre, dosis, frecuencia,
                semaforo_calc, egfr_usado, egfr_estadio,
-               estado, override_medico, override_motivo, fecha_inicio, fecha_fin, notas)
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+               estado, override_medico, override_motivo, fecha_inicio, fecha_fin, notas,
+               ea_descripcion, ea_gravedad, ea_accion, ea_fecha,
+               cambio_motivo, cambio_anterior, cambio_nueva, cambio_fecha, cambio_obs)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
         """, (
             vid, vis['paciente_id'],
             d.get('farmaco_id'), d.get('farmaco_libre'), d.get('dosis'), d.get('frecuencia'),
             semaforo, egfr_val, estadio,
             d.get('estado','activo'), d.get('override_medico',0), d.get('override_motivo'),
-            d.get('fecha_inicio'), d.get('fecha_fin'), d.get('notas')
+            d.get('fecha_inicio'), d.get('fecha_fin'), d.get('notas'),
+            *ea_fields, *cam_fields
         ))
         fid = cur.lastrowid
 
@@ -1564,9 +1647,226 @@ def get_farmacos_activos_paciente(pid):
     return ok(rows_to_list(rows))
 
 
+# ════════════════════════════════════════════════════════════
+# CONFIGURACIÓN CALLMEBOT / WHATSAPP
+# ════════════════════════════════════════════════════════════
+CALLMEBOT_APIKEY = os.environ.get('CALLMEBOT_APIKEY', '8559578')
+CALLMEBOT_PHONE  = os.environ.get('CALLMEBOT_PHONE', '')
+
+# Cola offline: PINs pendientes de enviar
+_pin_queue = []   # lista de dicts {pid, telefono, pin, nombre}
+_queue_lock = threading.Lock()
+
+def _gen_pin():
+    return ''.join(random.choices(string.digits, k=4))
+
+def _send_whatsapp(telefono: str, mensaje: str) -> bool:
+    """Envía mensaje vía CallMeBot. Retorna True si OK."""
+    if not CALLMEBOT_APIKEY:
+        return False
+    phone = telefono.replace('+','').replace('-','').replace(' ','').replace('(','').replace(')','')
+    if not phone.startswith('1') and len(phone) == 10:
+        phone = '1' + phone          # asumir RD si 10 dígitos sin código país
+    url = (
+        f"https://api.callmebot.com/whatsapp.php"
+        f"?phone={phone}&text={urllib.parse.quote(mensaje)}&apikey={CALLMEBOT_APIKEY}"
+    )
+    try:
+        with urllib.request.urlopen(url, timeout=8) as r:
+            return r.status == 200
+    except Exception:
+        return False
+
+def _flush_queue():
+    """Intenta enviar todos los PINs en cola cuando hay red."""
+    with _queue_lock:
+        pendientes = list(_pin_queue)
+    enviados = []
+    for item in pendientes:
+        ok_send = _send_whatsapp(item['telefono'], item['mensaje'])
+        if ok_send:
+            enviados.append(item)
+            # Marcar como enviado en BD
+            try:
+                db = get_db()
+                db.execute("UPDATE pacientes SET pin_enviado=1 WHERE id=?", (item['pid'],))
+                db.commit(); db.close()
+            except Exception:
+                pass
+    with _queue_lock:
+        for item in enviados:
+            if item in _pin_queue:
+                _pin_queue.remove(item)
+
+# ════════════════════════════════════════════════════════════
+# RUTAS PORTAL PACIENTE
+# ════════════════════════════════════════════════════════════
+
+@app.route('/paciente')
+def portal_paciente():
+    """Página de login del portal de pacientes."""
+    html = open(os.path.join(os.path.dirname(__file__), 'static', 'portal.html')).read()
+    return html
+
+@app.route('/api/portal/login', methods=['POST'])
+def portal_login():
+    d = request.json
+    cedula = (d.get('cedula') or '').strip()
+    pin    = (d.get('pin')    or '').strip()
+    if not cedula or not pin:
+        return err('Cédula y PIN requeridos', 400)
+    db = get_db()
+    pac = row_to_dict(db.execute(
+        "SELECT * FROM pacientes WHERE cedula=? AND pin_acceso=? AND portal_activo=1 AND activo=1",
+        (cedula, pin)
+    ).fetchone())
+    db.close()
+    if not pac:
+        return err('Cédula o PIN incorrecto', 401)
+    return ok({'paciente_id': pac['id'], 'nombre': pac['nombre'], 'apellidos': pac['apellidos']})
+
+@app.route('/api/portal/datos/<int:pid>', methods=['GET'])
+def portal_datos_paciente(pid):
+    """Datos que el paciente puede ver: plan, metas, fármacos, próxima cita."""
+    db = get_db()
+    # Última visita
+    visita = row_to_dict(db.execute(
+        "SELECT * FROM visitas WHERE paciente_id=? AND activo=1 ORDER BY fecha DESC, id DESC LIMIT 1",
+        (pid,)
+    ).fetchone())
+    if not visita:
+        db.close()
+        return ok({'sin_datos': True})
+
+    vid = visita['id']
+    plan  = row_to_dict(db.execute("SELECT * FROM plan_nutricional WHERE visita_id=? ORDER BY id DESC LIMIT 1", (vid,)).fetchone()) or {}
+    reqs  = row_to_dict(db.execute("SELECT * FROM requerimientos_visita WHERE visita_id=?", (vid,)).fetchone()) or {}
+    farmacos = rows_to_list(db.execute("""
+        SELECT fv.dosis, fv.frecuencia, fv.notas, fv.estado, fv.fecha_inicio,
+               fc.nombre as nombre, fc.clase
+        FROM farmacos_visita fv
+        LEFT JOIN farmacos_catalogo fc ON fc.id = fv.farmaco_id
+        WHERE fv.visita_id=? AND fv.estado='activo'
+    """, (vid,)).fetchall())
+    # Evolución de peso (últimas 6 visitas)
+    evol = rows_to_list(db.execute("""
+        SELECT v.fecha, cc.peso FROM visitas v
+        JOIN composicion_corporal cc ON cc.visita_id = v.id
+        WHERE v.paciente_id=? AND cc.peso IS NOT NULL
+        ORDER BY v.fecha ASC LIMIT 6
+    """, (pid,)).fetchall())
+    db.close()
+
+    return ok({
+        'visita_fecha':   visita.get('fecha'),
+        'proxima_cita':   visita.get('proxima_cita'),
+        'kcal_objetivo':  reqs.get('kcal_objetivo') or plan.get('kcal_prescritas'),
+        'proteina_g':     reqs.get('proteina_g_dia') or plan.get('proteina_prescrita'),
+        'agua_l':         reqs.get('agua_ml_dia', 0) and round(reqs['agua_ml_dia']/1000, 1),
+        'indicaciones':   plan.get('indicaciones') or plan.get('texto_libre') or '',
+        'objetivo':       plan.get('objetivo_principal') or '',
+        'farmacos':       farmacos,
+        'evolucion_peso': evol,
+    })
+
+@app.route('/api/pacientes/<int:pid>/generar_pin', methods=['POST'])
+def generar_pin_paciente(pid):
+    """Genera PIN para un paciente y lo envía por WhatsApp si hay red."""
+    db = get_db()
+    pac = row_to_dict(db.execute("SELECT * FROM pacientes WHERE id=?", (pid,)).fetchone())
+    if not pac:
+        db.close()
+        return err('Paciente no encontrado', 404)
+
+    pin = _gen_pin()
+    ahora = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    db.execute(
+        "UPDATE pacientes SET pin_acceso=?, pin_generado_at=?, pin_enviado=0 WHERE id=?",
+        (pin, ahora, pid)
+    )
+    db.commit(); db.close()
+
+    nombre   = f"{pac['nombre']} {pac['apellidos']}"
+    telefono = pac.get('telefono', '')
+    mensaje  = (
+        f"Hola {pac['nombre']} 👋\n"
+        f"Tu PIN de acceso al portal NutriCare es: *{pin}*\n"
+        f"Entra con tu cédula + este PIN en: nutricare.dra-jaquez.com/paciente\n"
+        f"— Dra. Anayanet Jáquez · Nutrióloga Clínica"
+    )
+
+    enviado = False
+    if telefono and CALLMEBOT_APIKEY:
+        enviado = _send_whatsapp(telefono, mensaje)
+
+    if not enviado and telefono:
+        # Guardar en cola para enviar cuando haya red
+        with _queue_lock:
+            _pin_queue.append({'pid': pid, 'telefono': telefono, 'mensaje': mensaje, 'nombre': nombre})
+
+    return ok({
+        'pin': pin,
+        'enviado': enviado,
+        'en_cola': not enviado and bool(telefono),
+        'sin_telefono': not bool(telefono),
+    }, 'PIN generado' + (' y enviado por WhatsApp ✓' if enviado else ' — pendiente de red'))
+
+@app.route('/api/portal/flush_queue', methods=['POST'])
+def flush_queue():
+    """El frontend llama esto cuando detecta que hay internet."""
+    threading.Thread(target=_flush_queue, daemon=True).start()
+    return ok({'pendientes': len(_pin_queue)})
+
+@app.route('/api/config/callmebot', methods=['POST'])
+def set_callmebot_config():
+    """Guarda API key y teléfono de CallMeBot en variables de entorno del proceso."""
+    global CALLMEBOT_APIKEY, CALLMEBOT_PHONE
+    d = request.json
+    if d.get('apikey'):
+        CALLMEBOT_APIKEY = d['apikey']
+        os.environ['CALLMEBOT_APIKEY'] = d['apikey']
+    if d.get('phone'):
+        CALLMEBOT_PHONE = d['phone']
+        os.environ['CALLMEBOT_PHONE'] = d['phone']
+    return ok({'configurado': bool(CALLMEBOT_APIKEY)})
+
+@app.route('/api/config/callmebot', methods=['GET'])
+def get_callmebot_config():
+    return ok({'configurado': bool(CALLMEBOT_APIKEY), 'pendientes_cola': len(_pin_queue)})
+
+def _migrate_db():
+    """Agrega columnas nuevas si no existen (safe ALTER TABLE)."""
+    import sqlite3 as _sqlite3
+    from db_utils import DB_PATH
+    conn = _sqlite3.connect(DB_PATH)
+    existing = {r[1] for r in conn.execute("PRAGMA table_info(farmacos_visita)").fetchall()}
+    new_cols = {
+        'ea_descripcion': 'TEXT', 'ea_gravedad': 'TEXT',
+        'ea_accion': 'TEXT',      'ea_fecha': 'DATE',
+        'cambio_motivo': 'TEXT',  'cambio_anterior': 'TEXT',
+        'cambio_nueva': 'TEXT',   'cambio_fecha': 'DATE',
+        'cambio_obs': 'TEXT',
+    }
+    for col, typ in new_cols.items():
+        if col not in existing:
+            conn.execute(f"ALTER TABLE farmacos_visita ADD COLUMN {col} {typ}")
+            print(f"[migrate] farmacos_visita +{col}")
+
+    # Columnas PIN en pacientes
+    pac_cols = {r[1] for r in conn.execute("PRAGMA table_info(pacientes)").fetchall()}
+    pin_cols = {'pin_acceso':'TEXT','pin_generado_at':'DATETIME','pin_enviado':'INTEGER DEFAULT 0','portal_activo':'INTEGER DEFAULT 1'}
+    for col, typ in pin_cols.items():
+        if col not in pac_cols:
+            conn.execute(f"ALTER TABLE pacientes ADD COLUMN {col} {typ}")
+            print(f"[migrate] pacientes +{col}")
+
+    conn.commit(); conn.close()
+
+_migrate_db()
+
 if __name__ == '__main__':
     print("=" * 55)
     print("  Plataforma Nutricional — Dra. Anayanet Jáquez")
-    print("  Abre tu navegador en: http://localhost:5000")
+    print("  Abre tu navegador en: http://localhost:5001")
     print("=" * 55)
-    app.run(debug=False, port=5000, host='127.0.0.1')
+    app.run(debug=False, port=5001, host='127.0.0.1')
